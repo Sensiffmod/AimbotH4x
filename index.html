@@ -16,11 +16,10 @@
             height: 100%;
             background-color: #050505;
             color: #ffffff;
-            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
 
-        /* Nền hạt bụi */
         #particles-js {
             position: fixed;
             width: 100%;
@@ -37,160 +36,100 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
         }
 
         /* Panel chung */
         .panel {
-            background: rgba(15, 15, 15, 0.85);
+            background: rgba(15, 15, 15, 0.95);
             backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 15px;
+            padding: 25px;
+            border-radius: 20px;
             border: 1px solid rgba(0, 255, 0, 0.3);
             box-shadow: 0 0 30px rgba(0, 255, 0, 0.1);
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             text-align: center;
-            transition: all 0.5s ease;
+            animation: fadeIn 0.4s ease-out;
         }
 
-        h2 {
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h2, h1 {
             color: #00ff00;
-            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-            margin-bottom: 30px;
-            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
         }
 
-        .input-group {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
+        /* Input & Button */
+        .input-group { position: relative; margin-bottom: 15px; }
         input {
             width: 100%;
             padding: 12px 15px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid #333;
             color: #fff;
-            border-radius: 8px;
+            border-radius: 10px;
             outline: none;
             box-sizing: border-box;
-            transition: 0.3s;
         }
-
-        input:focus {
-            border-color: #00ff00;
-            background: rgba(0, 255, 0, 0.05);
-        }
-
-        /* Icon con mắt */
-        .eye-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #666;
-            transition: 0.3s;
-        }
-
-        .eye-icon:hover { color: #00ff00; }
+        input:focus { border-color: #00ff00; box-shadow: 0 0 10px rgba(0, 255, 0, 0.2); }
 
         .btn-main {
-            background: #00ff00;
-            color: #000;
-            border: none;
-            padding: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            border-radius: 8px;
-            text-transform: uppercase;
+            background: #00ff00; color: #000; border: none;
+            padding: 14px; font-weight: bold; cursor: pointer;
+            width: 100%; border-radius: 10px; text-transform: uppercase;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
         }
+        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 5px 20px #00ff00; }
 
-        .btn-main:hover {
-            background: #05ff05;
-            transform: scale(1.02);
-            box-shadow: 0 0 20px #00ff00;
-        }
-
-        .links {
-            margin-top: 20px;
-            font-size: 14px;
-        }
-
-        .links a {
-            color: #aaa;
-            text-decoration: none;
-            margin: 0 5px;
-        }
-
-        .links a:hover { color: #00ff00; }
-
-        /* Màn hình Dashboard sau khi đăng nhập */
-        #dashboard {
-            display: none;
-            width: 100%;
-            max-width: 1000px;
-            text-align: center;
-            animation: fadeIn 1s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .glow-title {
-            font-size: 2.5rem;
-            color: #fff;
-            text-shadow: 0 0 20px #00ff00;
-            margin-bottom: 50px;
-        }
-
+        /* Dashboard */
+        #dashboard { display: none; width: 100%; max-width: 900px; text-align: center; }
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            gap: 15px;
         }
-
         .product-card {
-            background: rgba(20, 20, 20, 0.9);
-            border: 1px solid rgba(0, 255, 0, 0.2);
-            padding: 40px 20px;
-            border-radius: 20px;
+            background: rgba(25, 25, 25, 0.8);
+            border: 1px solid rgba(0, 255, 0, 0.15);
+            padding: 35px 20px;
+            border-radius: 15px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.3s;
             position: relative;
-            overflow: hidden;
         }
+        .product-card:hover { border-color: #00ff00; background: rgba(0, 255, 0, 0.05); }
+        .product-card h3 { margin: 0; font-size: 1.1rem; }
 
-        .product-card:hover {
+        /* Detail & Servers */
+        #service-detail { display: none; }
+        .server-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .server-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #333;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+        .server-item.active {
             border-color: #00ff00;
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.15);
-            background: rgba(0, 255, 0, 0.05);
+            background: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
         }
-
-        .product-card h3 {
-            margin: 0;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-        }
-
-        .product-card::before {
-            content: '✓';
-            position: absolute;
-            right: -20px;
-            top: -20px;
-            font-size: 5rem;
-            color: rgba(0, 255, 0, 0.05);
-        }
-
-        @media (max-width: 600px) {
-            .glow-title { font-size: 1.5rem; }
+        .back-btn {
+            background: none; border: none; color: #888;
+            padding: 10px; cursor: pointer; width: 100%; margin-top: 5px;
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -202,71 +141,99 @@
         <div id="login-box" class="panel">
             <h2>HỆ THỐNG SMM</h2>
             <div class="input-group">
-                <input type="text" placeholder="Tên đăng nhập" id="user">
+                <input type="text" placeholder="Tên đăng nhập">
             </div>
             <div class="input-group">
                 <input type="password" id="password" placeholder="Mật khẩu">
-                <i class="fas fa-eye eye-icon" id="togglePassword"></i>
+                <i class="fas fa-eye" style="position:absolute; right:15px; top:15px; cursor:pointer; color:#666;" onclick="togglePass()"></i>
             </div>
-            <button class="btn-main" onclick="login()">ĐĂNG NHẬP NGAY</button>
-            <div class="links">
-                <a href="#">Đăng ký tài khoản</a> | <a href="#">Quên mật khẩu?</a>
-            </div>
+            <button class="btn-main" onclick="login()">Đăng Nhập Ngay</button>
         </div>
 
         <div id="dashboard">
-            <h1 class="glow-title">SMM TIKTOK MẠNH NHẤT VIỆT NAM 🇻🇳</h1>
+            <h1 style="margin-bottom:30px;">SMM TIKTOK VIỆT NAM 🇻🇳</h1>
             <div class="product-grid">
-                <div class="product-card"><h3>1. Tăng Tim TikTok</h3></div>
-                <div class="product-card"><h3>2. Tăng Follow TikTok</h3></div>
-                <div class="product-card"><h3>3. Tăng View TikTok</h3></div>
-                <div class="product-card"><h3>4. Tăng Lưu TikTok</h3></div>
-                <div class="product-card"><h3>5. Tăng Share TikTok</h3></div>
-                <div class="product-card"><h3>6. Tăng Đăng Lại TikTok</h3></div>
+                <div class="product-card" onclick="openService('Tim')"><h3>1. Tăng Tim TikTok</h3></div>
+                <div class="product-card" onclick="openService('Follow')"><h3>2. Tăng Follow TikTok</h3></div>
+                <div class="product-card" onclick="openService('View')"><h3>3. Tăng View TikTok</h3></div>
+                <div class="product-card" onclick="openService('Lưu')"><h3>4. Tăng Lưu TikTok</h3></div>
+                <div class="product-card" onclick="openService('Share')"><h3>5. Tăng Share TikTok</h3></div>
+                <div class="product-card" onclick="openService('Đăng Lại')"><h3>6. Tăng Đăng Lại TikTok</h3></div>
             </div>
+        </div>
+
+        <div id="service-detail" class="panel">
+            <h2 id="service-title">Dịch Vụ</h2>
+            <div class="server-grid">
+                <div class="server-item active" onclick="selSv(this)"><b>Server 1</b><br><span class="sv-txt">Tây</span></div>
+                <div class="server-item" onclick="selSv(this)"><b>Server 2</b><br><span class="sv-txt">Việt</span></div>
+                <div class="server-item" onclick="selSv(this)"><b>Server 3</b><br><span class="sv-txt">Bot</span></div>
+                <div class="server-item" onclick="selSv(this)"><b>Server 4</b><br><span class="sv-txt">Ảo</span></div>
+            </div>
+            <div class="input-group">
+                <input type="text" placeholder="Nhập Link TikTok..." id="link">
+            </div>
+            <div class="input-group">
+                <input type="number" placeholder="Số lượng cần tăng..." id="qty">
+            </div>
+            <button class="btn-main" onclick="order()">BẮT ĐẦU XỬ LÝ</button>
+            <button class="back-btn" onclick="goBack()">Quay lại danh mục</button>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
     <script>
-        /* --- JAVASCRIPT --- */
-
-        // 1. Cấu hình hiệu ứng hạt bụi chạy chậm
+        // Cấu hình hạt bụi di chuyển chậm
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
+                "number": { "value": 90 },
                 "color": { "value": "#00ff00" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.3, "random": true },
-                "size": { "value": 2, "random": true },
+                "opacity": { "value": 0.2 },
+                "size": { "value": 2 },
                 "line_linked": { "enable": true, "distance": 150, "color": "#00ff00", "opacity": 0.1, "width": 1 },
-                "move": { "enable": true, "speed": 0.8, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
-            },
-            "interactivity": {
-                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } }
+                "move": { "enable": true, "speed": 0.6, "random": true, "out_mode": "out" }
             }
         });
 
-        // 2. Logic hiện/ẩn mật khẩu (Con mắt)
-        const toggleBtn = document.querySelector('#togglePassword');
-        const passwordInput = document.querySelector('#password');
+        function togglePass() {
+            const p = document.getElementById('password');
+            p.type = p.type === 'password' ? 'text' : 'password';
+        }
 
-        toggleBtn.addEventListener('click', function() {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            this.classList.toggle('fa-eye-slash');
-            this.classList.toggle('fa-eye');
-        });
-
-        // 3. Logic Đăng nhập & Hiện thông báo
         function login() {
-            // Thông báo theo yêu cầu của bro
             alert("SMM Tiktok mạnh nhất Việt Nam 🇻🇳");
-            
-            // Chuyển sang màn hình sản phẩm
             document.getElementById('login-box').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
+        }
+
+        function openService(type) {
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('service-detail').style.display = 'block';
+            document.getElementById('service-title').innerText = "Tăng " + type + " TikTok";
+            
+            // Cập nhật tên server (Ví dụ: Share Tây, Share Việt...)
+            const txts = document.querySelectorAll('.sv-txt');
+            txts.forEach(t => {
+                const region = t.innerText.split(' ').pop(); // Lấy chữ Tây/Việt/Bot/Ảo
+                t.innerText = type + " " + region;
+            });
+        }
+
+        function selSv(el) {
+            document.querySelectorAll('.server-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function goBack() {
+            document.getElementById('service-detail').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+        }
+
+        function order() {
+            const l = document.getElementById('link').value;
+            const q = document.getElementById('qty').value;
+            if(l && q) alert("Hệ thống đã nhận đơn! Đang bắt đầu chạy...");
+            else alert("Vui lòng điền đủ thông tin!");
         }
     </script>
 </body>
