@@ -31,7 +31,7 @@
             box-sizing: border-box;
         }
 
-        /* Header giống hình */
+        /* Header */
         .header {
             background: var(--card);
             padding: 15px;
@@ -63,10 +63,13 @@
             justify-content: space-between;
             align-items: center;
             border: 1px solid #1e293b;
+            transition: 0.3s;
         }
 
+        .item:active { transform: scale(0.98); }
+
         .item-info { display: flex; align-items: center; }
-        .gun-icon { font-size: 1.4rem; margin-right: 15px; filter: saturate(2); }
+        .gun-icon { font-size: 1.4rem; margin-right: 15px; }
         .item-text h4 { margin: 0; font-size: 0.85rem; text-transform: uppercase; }
         .item-text p { margin: 2px 0 0; font-size: 0.7rem; color: var(--text-dim); }
 
@@ -91,7 +94,7 @@
         input:checked + .slider { background-color: var(--green); }
         input:checked + .slider:before { transform: translateX(18px); }
 
-        /* Input & Button */
+        /* Action Area */
         .action-area { margin-top: 20px; text-align: center; }
         .key-input {
             width: 100%;
@@ -112,25 +115,32 @@
             border-radius: 8px; padding: 12px;
             font-weight: bold; cursor: pointer;
             font-size: 1rem;
+            transition: 0.2s;
         }
+        .btn-main:active { background: #16a34a; transform: scale(0.95); }
 
         .status {
             color: var(--green);
             font-weight: bold;
             margin-top: 20px;
             display: none;
+            animation: fadeIn 0.5s;
         }
+
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
 
         .admin-btn {
             margin-top: 40px;
             color: #1e293b;
             font-size: 0.6rem;
             cursor: pointer;
-            text-decoration: none;
         }
     </style>
 </head>
 <body>
+
+<audio id="soundClick" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+<audio id="soundSuccess" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3"></audio>
 
 <div class="container">
     <div class="header">
@@ -146,7 +156,10 @@
             <span class="gun-icon">🔫</span>
             <div class="item-text"><h4>DESERT EAGLE</h4><p>Hỗ trợ độ bám tâm 90%</p></div>
         </div>
-        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+        <label class="switch">
+            <input type="checkbox" onchange="playClick()">
+            <span class="slider"></span>
+        </label>
     </div>
 
     <div class="item">
@@ -154,7 +167,10 @@
             <span class="gun-icon">🔫</span>
             <div class="item-text"><h4>UMP Tiểu Liên</h4><p>Hỗ trợ nhạy tâm 90%</p></div>
         </div>
-        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+        <label class="switch">
+            <input type="checkbox" onchange="playClick()">
+            <span class="slider"></span>
+        </label>
     </div>
 
     <div class="item">
@@ -162,7 +178,10 @@
             <span class="gun-icon">🔫</span>
             <div class="item-text"><h4>Shotgun M1887</h4><p>Đằm tâm khi kéo 90%</p></div>
         </div>
-        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+        <label class="switch">
+            <input type="checkbox" onchange="playClick()">
+            <span class="slider"></span>
+        </label>
     </div>
 
     <div class="item">
@@ -170,7 +189,10 @@
             <span class="gun-icon">🔫</span>
             <div class="item-text"><h4>MP40 Tiểu Liên</h4><p>Giảm loạn tâm khi kéo 90%</p></div>
         </div>
-        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+        <label class="switch">
+            <input type="checkbox" onchange="playClick()">
+            <span class="slider"></span>
+        </label>
     </div>
 
     <div class="item">
@@ -178,7 +200,10 @@
             <span class="gun-icon">🎯</span>
             <div class="item-text"><h4>Tâm ảo Aim</h4><p>Hồng tâm hỗ trợ ngắm</p></div>
         </div>
-        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+        <label class="switch">
+            <input type="checkbox" onchange="playClick()">
+            <span class="slider"></span>
+        </label>
     </div>
 
     <div class="action-area">
@@ -191,17 +216,26 @@
 </div>
 
 <script>
-    // Danh sách 10 mã mẫu (Bạn có thể thêm cho đủ 100)
-    const keys = ["H4X-8K92-P1X7-L001", "H4X-A2B3-C4D5-E6F7", "H4X-VUAFILE-9999", "H4X-SASUKE-2026"];
+    const keys = ["H4X-8K92-P1X7-L001", "H4X-VUAFILE-2026"];
     const adminPass = "Admin@VuaFile#2026!H4X";
+
+    // Hàm phát âm thanh khi gạt nút
+    function playClick() {
+        const sfx = document.getElementById('soundClick');
+        sfx.currentTime = 0; // Phát lại từ đầu nếu nhấn liên tục
+        sfx.play();
+    }
 
     function activate() {
         const input = document.getElementById('key').value;
+        const successSfx = document.getElementById('soundSuccess');
+        
         if(keys.includes(input)) {
+            successSfx.play();
             document.getElementById('msg').style.display = 'block';
-            alert("Kích hoạt thành công!");
+            alert("Hệ thống đã sẵn sàng!");
         } else {
-            alert("Mã sai hoặc không tồn tại!");
+            alert("Mã sai!");
         }
     }
 
@@ -209,8 +243,6 @@
         const p = prompt("Nhập mã Admin:");
         if(p === adminPass) {
             alert("Danh sách mã:\n" + keys.join("\n"));
-        } else {
-            alert("Biến!");
         }
     }
 </script>
