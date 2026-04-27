@@ -4,94 +4,214 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SMM PANEL - Dịch vụ MXH</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS GỘP CHUNG VÀO ĐÂY ĐỂ TRÁNH LỖI TRẮNG TRANG --- */
+        :root {
+            --primary-color: #26c6da;
+            --dark-bg: #1a1a1a;
+            --light-blue: #e8eff9;
+            --text-dark: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            color: var(--text-dark);
+        }
+
+        /* Header */
+        header {
+            background: #fff;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-box { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 18px; }
+        .logo-box img { width: 30px; border-radius: 5px; }
+
+        /* Container chính */
+        .container { padding: 15px; max-width: 500px; margin: 0 auto; }
+
+        /* Banner đen ngầu */
+        .banner {
+            background: #000;
+            color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .banner-text h2 { color: var(--primary-color); margin: 0 0 5px 0; font-size: 20px; }
+        .banner-text p { font-size: 12px; line-height: 1.4; color: #ccc; margin: 0; }
+        .banner-icons { display: flex; flex-wrap: wrap; width: 80px; gap: 5px; }
+        .banner-icons i { color: #ff4757; font-size: 10px; }
+
+        /* Nút đăng nhập/ký */
+        .auth-btns { display: flex; gap: 10px; margin-bottom: 15px; }
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-login { background: #4db6ac; }
+        .btn-register { background: #00bcd4; }
+
+        /* Thống kê */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            background: var(--light-blue);
+            padding: 15px 5px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .stats-item strong { display: block; font-size: 16px; color: #2c3e50; }
+        .stats-item span { font-size: 11px; color: #7f8c8d; }
+
+        /* Mục dịch vụ */
+        .section-title { font-size: 16px; font-weight: bold; margin: 15px 0 10px; display: flex; align-items: center; gap: 8px; }
+        .grid-services { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        
+        .card {
+            background: #fff;
+            padding: 12px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: 0.2s;
+        }
+        .card:active { transform: scale(0.95); }
+        .card i { font-size: 18px; }
+        .tk-icon { color: #000; }
+        .fb-icon { color: #1877f2; }
+        .ig-icon { color: #e1306c; }
+
+        /* Cấp bậc */
+        .tier-card {
+            background: #fff;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .tier-header { padding: 10px; color: #fff; font-weight: bold; text-align: center; }
+        .bg-member { background: #5c6bc0; }
+        .bg-ctv { background: #26a69a; }
+        .bg-daily { background: #263238; }
+
+        .tier-body { padding: 15px; list-style: none; margin: 0; font-size: 13px; }
+        .tier-body li { margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .fa-check-circle { color: #4caf50; }
+        .fa-times-circle { color: #e74c3c; }
+
+        /* Footer */
+        .footer { text-align: center; padding: 20px; font-size: 14px; color: #666; border-top: 1px solid #eee; margin-top: 20px; }
+        .footer strong { color: #000; }
+    </style>
 </head>
 <body>
 
     <header>
-        <div class="menu-icon"><i class="fas fa-bars"></i></div>
-        <div class="logo">SMM PANEL</div>
-        <div class="user-icon"><i class="fas fa-user-circle"></i></div>
+        <div class="logo-box">
+            <i class="fas fa-bars"></i>
+            <span>SMM PANEL</span>
+        </div>
+        <div class="user-icon"><i class="fas fa-user-circle fa-lg"></i></div>
     </header>
 
     <div class="container">
         <div class="banner">
             <div class="banner-text">
                 <h2>SMM PANEL</h2>
-                <p>Chuyên cung cấp dịch vụ và giải pháp gia tăng doanh số, nhận diện thương hiệu trên MXH.</p>
+                <p>Chuyên cung cấp dịch vụ và giải pháp gia tăng doanh số, nhận diện thương hiệu trên MXH. Hệ thống hỗ trợ giúp bạn tăng tương tác...</p>
             </div>
-            <div class="banner-img">
-                <img src="https://via.placeholder.com/100" alt="icon">
+            <div class="banner-icons">
+                <i class="fas fa-heart"></i> <i class="fas fa-heart"></i> <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i> <i class="fas fa-heart"></i> <i class="fas fa-heart"></i>
             </div>
         </div>
 
-        <div class="auth-group">
+        <div class="auth-btns">
             <button class="btn btn-login">ĐĂNG NHẬP</button>
             <button class="btn btn-register">ĐĂNG KÝ</button>
         </div>
 
-        <div class="stats">
-            <div><strong>167.475</strong><br>Người dùng</div>
-            <div><strong>828.153</strong><br>Đơn hàng</div>
-            <div><strong>56</strong><br>Dịch vụ</div>
+        <div class="stats-bar">
+            <div class="stats-item"><strong>167.475</strong><span>Người dùng</span></div>
+            <div class="stats-item"><strong>828.153</strong><span>Đơn hàng</span></div>
+            <div class="stats-item"><strong>56</strong><span>Dịch vụ</span></div>
         </div>
 
-        <h3 class="section-title"><i class="fab fa-tiktok"></i> Dịch vụ TikTok</h3>
-        <div class="service-grid">
-            <div class="card"><i class="fab fa-tiktok color-tk"></i> Tăng Like ❤️</div>
-            <div class="card"><i class="fab fa-tiktok color-tk"></i> Tăng Follow 👤</div>
-            <div class="card"><i class="fab fa-tiktok color-tk"></i> Tăng View ▶️</div>
-            <div class="card"><i class="fab fa-tiktok color-tk"></i> Tăng Chia Sẻ ➡️</div>
+        <div class="section-title"><i class="fab fa-tiktok"></i> Dịch vụ TikTok</div>
+        <div class="grid-services">
+            <div class="card"><i class="fab fa-tiktok tk-icon"></i> Tăng Like ❤️</div>
+            <div class="card"><i class="fab fa-tiktok tk-icon"></i> Tăng Follow 👤</div>
+            <div class="card"><i class="fab fa-tiktok tk-icon"></i> Tăng View ▶️</div>
+            <div class="card"><i class="fab fa-tiktok tk-icon"></i> Nạp Xu TikTok 🪙</div>
         </div>
 
-        <h3 class="section-title"><i class="fab fa-facebook"></i> Dịch vụ Facebook</h3>
-        <div class="service-grid">
-            <div class="card"><i class="fab fa-facebook color-fb"></i> Tăng Like 👍</div>
-            <div class="card"><i class="fab fa-facebook color-fb"></i> Tăng Follow 👤</div>
-            <div class="card"><i class="fab fa-facebook color-fb"></i> Tăng View Video 👁️</div>
-            <div class="card"><i class="fab fa-facebook color-fb"></i> Tăng Bình Luận 💬</div>
+        <div class="section-title"><i class="fab fa-facebook"></i> Dịch vụ Facebook</div>
+        <div class="grid-services">
+            <div class="card"><i class="fab fa-facebook fb-icon"></i> Tăng Like 👍</div>
+            <div class="card"><i class="fab fa-facebook fb-icon"></i> Tăng Follow 👤</div>
+            <div class="card"><i class="fab fa-facebook fb-icon"></i> Tăng View Video 👁️</div>
+            <div class="card"><i class="fab fa-facebook fb-icon"></i> Tăng Bình Luận 💬</div>
         </div>
 
-        <h3 class="section-title"><i class="fab fa-instagram"></i> Dịch vụ Instagram</h3>
-        <div class="service-grid">
-            <div class="card"><i class="fab fa-instagram color-ig"></i> Tăng Like ❤️</div>
-            <div class="card"><i class="fab fa-instagram color-ig"></i> Tăng Follow 👤</div>
-            <div class="card"><i class="fab fa-instagram color-ig"></i> Tăng View 👁️</div>
+        <div class="section-title">Cấp bậc & Ưu đãi</div>
+        
+        <div class="tier-card">
+            <div class="tier-header bg-member"><i class="fas fa-user"></i> Thành viên</div>
+            <ul class="tier-body">
+                <li><i class="fas fa-check-circle"></i> Tăng Free: 1 lượt / ngày</li>
+                <li><i class="fas fa-times-circle"></i> Giảm giá dịch vụ</li>
+                <li><i class="fas fa-times-circle"></i> Tạo website riêng</li>
+            </ul>
         </div>
 
-        <h3 class="section-title">Cấp bậc & Ưu đãi</h3>
-        <div class="tier-grid">
-            <div class="tier-card member">
-                <div class="tier-header"><i class="fas fa-user"></i> Thành viên</div>
-                <ul>
-                    <li><i class="fas fa-check-circle"></i> Tăng Free: 1 lượt / ngày</li>
-                    <li><i class="fas fa-times-circle gray"></i> Giảm giá dịch vụ</li>
-                    <li><i class="fas fa-times-circle gray"></i> Tạo website riêng</li>
-                </ul>
-            </div>
-            <div class="tier-card ctv">
-                <div class="tier-header"><i class="fas fa-bookmark"></i> CTV</div>
-                <ul>
-                    <li><i class="fas fa-check-circle"></i> Tăng Free: 5 lượt / ngày</li>
-                    <li><i class="fas fa-check-circle"></i> Giảm giá dịch vụ</li>
-                    <li><i class="fas fa-check-circle"></i> Tạo website riêng</li>
-                </ul>
-            </div>
-            <div class="tier-card agency">
-                <div class="tier-header"><i class="fas fa-medal"></i> ĐẠI LÝ</div>
-                <ul>
-                    <li><i class="fas fa-check-circle"></i> Tăng Free: 10 lượt / ngày</li>
-                    <li><i class="fas fa-check-circle"></i> Giảm giá dịch vụ</li>
-                    <li><i class="fas fa-check-circle"></i> Tạo website riêng</li>
-                    <li><i class="fas fa-check-circle"></i> Hỗ trợ riêng</li>
-                </ul>
-            </div>
+        <div class="tier-card">
+            <div class="tier-header bg-ctv"><i class="fas fa-bookmark"></i> CTV</div>
+            <ul class="tier-body">
+                <li><i class="fas fa-check-circle"></i> Tăng Free: 5 lượt / ngày</li>
+                <li><i class="fas fa-check-circle"></i> Giảm giá dịch vụ</li>
+                <li><i class="fas fa-check-circle"></i> Tạo website riêng</li>
+            </ul>
         </div>
 
-        <div class="contact-footer">
-            <p>Liên hệ hỗ trợ <i class="fas fa-phone-alt"></i> Zalo: <strong>0837888626</strong></p> 
-            </div>
+        <div class="tier-card">
+            <div class="tier-header bg-daily"><i class="fas fa-medal"></i> ĐẠI LÝ</div>
+            <ul class="tier-body">
+                <li><i class="fas fa-check-circle"></i> Tăng Free: 10 lượt / ngày</li>
+                <li><i class="fas fa-check-circle"></i> Giảm giá dịch vụ</li>
+                <li><i class="fas fa-check-circle"></i> Tạo website riêng</li>
+                <li><i class="fas fa-check-circle"></i> Hỗ trợ riêng</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            Liên hệ hỗ trợ <i class="fab fa-whatsapp"></i> Zalo: <strong>0837888626</strong>
+        </div>
     </div>
 
 </body>
