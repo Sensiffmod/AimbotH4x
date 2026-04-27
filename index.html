@@ -6,104 +6,41 @@
     <title>SMM TikTok - Hệ Thống Mạnh Nhất VN 🇻🇳</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%;
-            background-color: #050505; color: #ffffff;
-            font-family: 'Inter', sans-serif; overflow-x: hidden;
-        }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; top: 0; left: 0; }
-
-        /* Header & Balance */
-        .header {
-            position: fixed; top: 0; left: 0; width: 100%; height: 55px;
-            background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 255, 0, 0.2); z-index: 100;
-            display: flex; justify-content: space-between; align-items: center; padding: 0 15px; box-sizing: border-box;
-        }
-        .menu-btn { font-size: 20px; color: #00ff00; cursor: pointer; }
-        .balance-area {
-            background: rgba(0, 255, 0, 0.1); padding: 5px 12px;
-            border-radius: 20px; border: 1px solid rgba(0, 255, 0, 0.2);
-            font-size: 13px; display: flex; align-items: center; gap: 5px;
-        }
-
-        /* Sidebar Menu */
-        .sidebar {
-            position: fixed; top: 0; left: -280px; width: 260px; height: 100%;
-            background: #0a0a0a; border-right: 1px solid rgba(0, 255, 0, 0.2);
-            z-index: 200; transition: 0.3s; padding: 20px; box-sizing: border-box;
-        }
+        .header { position: fixed; top: 0; left: 0; width: 100%; height: 55px; background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 255, 0, 0.2); z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0 15px; box-sizing: border-box; }
+        .balance-area { background: rgba(0, 255, 0, 0.1); padding: 5px 12px; border-radius: 20px; border: 1px solid rgba(0, 255, 0, 0.2); font-size: 13px; display: flex; align-items: center; gap: 5px; }
+        .sidebar { position: fixed; top: 0; left: -280px; width: 260px; height: 100%; background: #0a0a0a; border-right: 1px solid rgba(0, 255, 0, 0.2); z-index: 200; transition: 0.3s; padding: 20px; box-sizing: border-box; }
         .sidebar.active { left: 0; }
-        .menu-item {
-            padding: 15px 10px; border-bottom: 1px solid #1a1a1a;
-            cursor: pointer; display: flex; align-items: center; gap: 12px; font-size: 14px;
-        }
-        .menu-item i { color: #00ff00; width: 20px; text-align: center; }
-
-        /* Container */
-        .container {
-            position: relative; z-index: 2; padding: 70px 10px 20px;
-            box-sizing: border-box; max-width: 600px; margin: 0 auto;
-        }
-
-        /* Tối ưu các mục sản phẩm & server */
+        .menu-item { padding: 15px 10px; border-bottom: 1px solid #1a1a1a; cursor: pointer; display: flex; align-items: center; gap: 12px; font-size: 14px; }
+        .container { position: relative; z-index: 2; padding: 70px 10px 20px; box-sizing: border-box; max-width: 600px; margin: 0 auto; }
         .glow-title { text-align: center; color: #00ff00; font-size: 1.4rem; margin-bottom: 20px; cursor: pointer; text-shadow: 0 0 10px #00ff00; }
         .product-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
-        .product-card {
-            background: rgba(20, 20, 20, 0.8); border: 1px solid rgba(0, 255, 0, 0.2);
-            padding: 20px; border-radius: 12px; text-align: center; cursor: pointer;
-        }
-        .product-card h3 { margin: 0; font-size: 0.95rem; font-weight: 500; }
-
-        .panel {
-            background: rgba(15, 15, 15, 0.98); border-radius: 15px;
-            border: 1px solid rgba(0, 255, 0, 0.3); padding: 15px; width: 100%; box-sizing: border-box;
-        }
-
-        /* Thu nhỏ Server để không bị tràn */
+        .product-card { background: rgba(20, 20, 20, 0.8); border: 1px solid rgba(0, 255, 0, 0.2); padding: 20px; border-radius: 12px; text-align: center; cursor: pointer; }
+        .panel { background: rgba(15, 15, 15, 0.98); border-radius: 15px; border: 1px solid rgba(0, 255, 0, 0.3); padding: 15px; width: 100%; box-sizing: border-box; }
         .server-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 15px 0; }
-        .server-item {
-            background: rgba(255, 255, 255, 0.05); border: 1px solid #333;
-            padding: 10px 5px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; text-align: center;
-        }
+        .server-item { background: rgba(255, 255, 255, 0.05); border: 1px solid #333; padding: 10px 5px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; text-align: center; transition: 0.2s; }
         .server-item.active { border-color: #00ff00; background: rgba(0, 255, 0, 0.1); color: #00ff00; }
-
-        /* Input & Button */
-        input {
-            width: 100%; padding: 12px; background: #111; border: 1px solid #333;
-            color: #00ff00; border-radius: 8px; margin-bottom: 10px; box-sizing: border-box; outline: none;
-        }
-        .btn-main {
-            background: #00ff00; color: #000; border: none; padding: 12px;
-            width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase;
-        }
-
-        /* Popup QR */
+        .server-item.disabled { opacity: 0.4; cursor: not-allowed; border-color: #444; color: #666; }
+        input { width: 100%; padding: 12px; background: #111; border: 1px solid #333; color: #00ff00; border-radius: 8px; margin-bottom: 10px; box-sizing: border-box; outline: none; }
+        .btn-main { background: #00ff00; color: #000; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .price-box { background: rgba(255, 255, 0, 0.1); border: 1px dashed yellow; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-size: 14px; text-align: center; color: #ffff00; }
+        .popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 350px; background: #0a0a0a; padding: 20px; border-radius: 15px; border: 1px solid #00ff00; z-index: 300; display: none; text-align: center; }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 150; display: none; }
-        .popup {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 90%; max-width: 350px; background: #0a0a0a; padding: 20px;
-            border-radius: 15px; border: 1px solid #00ff00; z-index: 300; display: none; text-align: center;
-        }
-        .qr-img { width: 100%; border-radius: 10px; border: 2px solid #fff; margin: 10px 0; }
-
         #admin-panel, #admin-login, #service-detail { display: none; }
-        textarea { width: 100%; height: 200px; background: #000; color: #00ff00; font-size: 10px; margin-top: 10px; padding: 10px; box-sizing: border-box; border-radius: 5px; }
+        textarea { width: 100%; height: 150px; background: #000; color: #00ff00; font-size: 10px; margin-top: 10px; padding: 10px; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
 <div id="particles-js"></div>
-
 <div class="header">
-    <div class="menu-btn" onclick="toggleSide()"><i class="fas fa-bars"></i></div>
-    <div class="balance-area">
-        <i class="fas fa-wallet"></i> <span id="money">0</span> VNĐ
-    </div>
+    <div onclick="toggleSide()"><i class="fas fa-bars" style="color:#00ff00; font-size:20px;"></i></div>
+    <div class="balance-area"><i class="fas fa-wallet"></i> <span id="money">0</span>đ</div>
 </div>
 
 <div class="sidebar" id="side">
-    <div style="text-align: right; margin-bottom: 20px;" onclick="toggleSide()"><i class="fas fa-times"></i></div>
+    <div style="text-align: right;" onclick="toggleSide()"><i class="fas fa-times"></i></div>
     <div class="menu-item" onclick="showPopup('qr-pop')"><i class="fas fa-qrcode"></i> Nạp Tiền QR</div>
     <div class="menu-item" onclick="showPopup('gift-pop')"><i class="fas fa-gift"></i> Nhập Giftcode</div>
     <div class="menu-item" onclick="window.open('https://zalo.me/0397208110')"><i class="fas fa-phone"></i> Liên Hệ Zalo</div>
@@ -125,124 +62,116 @@
     </div>
 
     <div id="service-detail" class="panel">
-        <h2 id="sv-title" style="font-size: 1.1rem; color: #00ff00;">Dịch vụ</h2>
+        <h2 id="sv-title" style="color: #00ff00; font-size: 1.2rem;">Dịch vụ</h2>
         <div class="server-grid">
-            <div class="server-item active" onclick="setSv(this)">S1 - <span class="t-name">Tây</span></div>
-            <div class="server-item" onclick="setSv(this)">S2 - <span class="t-name">Việt</span></div>
-            <div class="server-item" onclick="setSv(this)">S3 - <span class="t-name">Bot</span></div>
-            <div class="server-item" onclick="setSv(this)">S4 - <span class="t-name">Ảo</span></div>
+            <div class="server-item active" onclick="setSv(this, 'tây')">S1 - <span class="t-reg">Tây</span></div>
+            <div class="server-item" onclick="setSv(this, 'việt')">S2 - <span class="t-reg">Việt</span></div>
+            <div class="server-item" onclick="setSv(this, 'bot')">S3 - <span class="t-reg">Bot</span></div>
+            <div class="server-item" onclick="setSv(this, 'ảo')">S4 - <span class="t-reg">Ảo</span></div>
         </div>
-        <input type="text" placeholder="Nhập Link TikTok..." id="link">
-        <input type="number" placeholder="Số lượng..." id="amount">
-        <button class="btn-main" onclick="alert('Đã nhận đơn!')">BẮT ĐẦU CHẠY</button>
-        <p onclick="goHome()" style="font-size: 12px; margin-top: 15px; text-decoration: underline; cursor: pointer;">Quay lại</p>
+        
+        <div class="price-box">
+            Giá: <span id="unit-price">0</span>đ/1 | Tối thiểu: <span id="min-qty">0</span>
+        </div>
+
+        <input type="text" placeholder="Dán link TikTok..." id="link">
+        <input type="number" placeholder="Nhập số lượng..." id="amount" oninput="calcTotal()">
+        
+        <div style="margin-bottom: 15px; font-weight: bold; text-align: right;">
+            TỔNG: <span id="total-price" style="color: #00ff00; font-size: 1.2rem;">0</span>đ
+        </div>
+
+        <button class="btn-main" onclick="orderNow()">BẮT ĐẦU THANH TOÁN</button>
+        <p onclick="goHome()" style="text-align:center; font-size: 12px; margin-top: 15px; text-decoration: underline; cursor: pointer;">Quay lại trang chủ</p>
     </div>
 
-    <div id="admin-login" class="panel">
-        <h3>MẬT KHẨU ADMIN</h3>
-        <input type="password" id="ad-pass" placeholder="Nhập pass...">
-        <button class="btn-main" onclick="loginAdmin()">XÁC NHẬN</button>
-    </div>
-
-    <div id="admin-panel" class="panel">
-        <h3>QUẢN TRỊ VIÊN</h3>
-        <button class="btn-main" onclick="genGift()">TẠO 2000 MÃ CODE</button>
-        <textarea id="list-code" readonly></textarea>
-        <button onclick="goHome()" style="margin-top: 10px; background: none; color: #888; border: none;">Thoát Admin</button>
-    </div>
+    <div id="admin-login" class="panel"><h3>PASS ADMIN</h3><input type="password" id="ad-pass"><button class="btn-main" onclick="loginAdmin()">VÀO</button></div>
+    <div id="admin-panel" class="panel"><h3>QUẢN TRỊ</h3><button class="btn-main" onclick="genGift()">TẠO 2000 CODE</button><textarea id="list-code" readonly></textarea><button onclick="goHome()">Thoát</button></div>
 </div>
 
 <div class="popup" id="qr-pop">
-    <h3 style="margin: 0;">QUÉT MÃ NẠP TIỀN</h3>
-    <p style="font-size: 11px; color: #888;">NGUYEN QUOC HUY - 0397208110</p>
-    <img src="https://api.vietqr.io/image/970422-0397208110-v6S9k9m.jpg?accountName=NGUYEN%20QUOC%20HUY" class="qr-img">
-    <button onclick="closeAll()" class="btn-main" style="background: #333; color: #fff;">Đóng</button>
+    <img src="https://api.vietqr.io/image/970422-0397208110-v6S9k9m.jpg?accountName=NGUYEN%20QUOC%20HUY" style="width:100%; border-radius:10px;">
+    <button onclick="closeAll()" class="btn-main" style="margin-top:10px; background:#333; color:#fff;">Đóng</button>
 </div>
 
 <div class="popup" id="gift-pop">
-    <h3>NHẬP GIFTCODE</h3>
-    <input type="text" id="g-code" placeholder="Nhập mã của bạn...">
-    <button class="btn-main" onclick="useGift()">XÁC NHẬN NẠP</button>
-    <p onclick="closeAll()" style="font-size: 12px; margin-top: 10px;">Hủy bỏ</p>
+    <h3>NHẬP CODE</h3><input type="text" id="g-code"><button class="btn-main" onclick="useGift()">NẠP</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
-    particlesJS("particles-js", {"particles":{"number":{"value":60},"color":{"value":"#00ff00"},"size":{"value":2},"line_linked":{"enable":true,"distance":120,"color":"#00ff00","opacity":0.1},"move":{"speed":0.5}}});
+    particlesJS("particles-js", {"particles":{"number":{"value":50},"color":{"value":"#00ff00"},"size":{"value":2},"move":{"speed":0.4}}});
 
-    let count = 0;
-    const AD_PASS = "HuySMM@2026#Vip";
+    const prices = {
+        'Tim': { 'tây': 1, 'việt': 1.2, 'bot': 0.5, 'ảo': 0.6, min: 20 },
+        'Follow': { 'việt': 23, 'tây': 13, 'bot': 5, 'ảo': 4, min: 20 },
+        'View': { 'việt': 1.3, 'tây': 1.1, 'bot': 0.5, 'ảo': 0.2, min: 1000 },
+        'Lưu': { 'việt': 1, 'tây': 1.2, 'bot': 'Bảo trì', 'ảo': 'Bảo trì', min: 30 },
+        'Share': { 'việt': 0.5, 'tây': 1, 'bot': 0.3, 'ảo': 0.1, min: 20 },
+        'Đăng Lại': { 'việt': 2.1, 'tây': 0.9, 'bot': 1.3, 'ảo': 0.3, min: 30 }
+    };
+
+    let curCat = '', curReg = 'tây', count = 0;
 
     function toggleSide() { 
-        document.getElementById('side').classList.toggle('active');
-        document.getElementById('over').style.display = document.getElementById('side').classList.contains('active') ? 'block' : 'none';
+        let s = document.getElementById('side');
+        s.classList.toggle('active');
+        document.getElementById('over').style.display = s.classList.contains('active') ? 'block' : 'none';
     }
 
-    function showPopup(id) { 
-        closeAll();
-        document.getElementById(id).style.display = 'block';
-        document.getElementById('over').style.display = 'block';
-    }
-
-    function closeAll() {
-        document.querySelectorAll('.popup, .sidebar, .overlay').forEach(el => {
-            el.classList.remove('active');
-            el.style.display = 'none';
-        });
-    }
+    function showPopup(id) { closeAll(); document.getElementById(id).style.display = 'block'; document.getElementById('over').style.display = 'block'; }
+    function closeAll() { document.querySelectorAll('.popup, .sidebar, .overlay').forEach(el => { el.style.display = 'none'; el.classList.remove('active'); }); }
 
     function openSv(name) {
+        curCat = name; curReg = 'tây';
         document.getElementById('home').style.display = 'none';
         document.getElementById('service-detail').style.display = 'block';
-        document.getElementById('sv-title').innerText = "Tăng " + name;
-        document.querySelectorAll('.t-name').forEach(el => el.innerText = name + " " + el.parentElement.innerText.split(' ').pop());
+        document.getElementById('sv-title').innerText = "Dịch vụ " + name;
+        updateUI();
     }
 
-    function setSv(el) {
+    function setSv(el, reg) {
+        if(prices[curCat][reg] === 'Bảo trì') return alert("Server này đang bảo trì!");
+        curReg = reg;
         document.querySelectorAll('.server-item').forEach(i => i.classList.remove('active'));
         el.classList.add('active');
+        updateUI();
     }
 
-    function goHome() {
-        document.getElementById('service-detail').style.display = 'none';
-        document.getElementById('admin-panel').style.display = 'none';
-        document.getElementById('admin-login').style.display = 'none';
-        document.getElementById('home').style.display = 'block';
+    function updateUI() {
+        let p = prices[curCat][curReg];
+        let m = prices[curCat].min;
+        document.getElementById('unit-price').innerText = p;
+        document.getElementById('min-qty').innerText = m;
+        
+        // Kiểm tra bảo trì cho mục Lưu
+        document.querySelectorAll('.server-item').forEach(item => {
+            let r = item.innerText.split(' ').pop().toLowerCase();
+            if(prices[curCat][r] === 'Bảo trì') item.classList.add('disabled');
+            else item.classList.remove('disabled');
+        });
+        calcTotal();
     }
 
-    function useGift() {
-        if(document.getElementById('g-code').value == "GIFT500K") {
-            document.getElementById('money').innerText = "500.000";
-            alert("Nạp thành công 500k!");
-            closeAll();
-        } else { alert("Mã không đúng!"); }
+    function calcTotal() {
+        let q = parseInt(document.getElementById('amount').value) || 0;
+        let p = prices[curCat][curReg];
+        document.getElementById('total-price').innerText = (q * p).toLocaleString();
     }
 
-    function countAdmin() {
-        count++;
-        if(count >= 10) { 
-            count = 0; 
-            document.getElementById('home').style.display = 'none';
-            document.getElementById('admin-login').style.display = 'block';
-        }
+    function orderNow() {
+        let q = parseInt(document.getElementById('amount').value) || 0;
+        let m = prices[curCat].min;
+        if(q < m) return alert("Số lượng tối thiểu là " + m);
+        if(!document.getElementById('link').value) return alert("Vui lòng nhập link!");
+        alert("Đã gửi đơn hàng!");
     }
 
-    function loginAdmin() {
-        if(document.getElementById('ad-pass').value === AD_PASS) {
-            document.getElementById('admin-login').style.display = 'none';
-            document.getElementById('admin-panel').style.display = 'block';
-        } else { alert("Sai mật khẩu!"); }
-    }
-
-    function genGift() {
-        let txt = "";
-        for(let i=1; i<=2000; i++) {
-            let code = "HUY-" + Math.random().toString(36).substring(2,10).toUpperCase();
-            let val = [20, 50, 100, 200, 500][Math.floor(Math.random()*5)];
-            txt += i + ". " + code + " | " + val + "k\n";
-        }
-        document.getElementById('list-code').value = txt;
-    }
+    function goHome() { document.getElementById('service-detail').style.display = 'none'; document.getElementById('home').style.display = 'block'; }
+    function useGift() { if(document.getElementById('g-code').value == "GIFT500K") { document.getElementById('money').innerText = "500.000"; alert("Thành công!"); closeAll(); } }
+    function countAdmin() { count++; if(count >= 10) { count = 0; document.getElementById('home').style.display='none'; document.getElementById('admin-login').style.display='block'; } }
+    function loginAdmin() { if(document.getElementById('ad-pass').value === "HuySMM@2026#Vip") { document.getElementById('admin-login').style.display='none'; document.getElementById('admin-panel').style.display='block'; } }
+    function genGift() { let t = ""; for(let i=1;i<=2000;i++) { t += i + ". HUY-" + Math.random().toString(36).substring(2,10).toUpperCase() + "\n"; } document.getElementById('list-code').value = t; }
 </script>
 </body>
 </html>
