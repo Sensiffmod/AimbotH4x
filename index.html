@@ -27,11 +27,9 @@
         .panel { background: rgba(10, 10, 10, 0.98); border-radius: 20px; border: 1px solid #00ff00; padding: 20px; width: 100%; box-sizing: border-box; position: relative; margin-top: 15px; }
         .close-btn { position: absolute; top: 15px; right: 20px; color: #ff4444; font-size: 28px; cursor: pointer; }
 
-        /* Server Grid */
         .server-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0; }
         .server-item { background: #1a1a1a; border: 1px solid #333; padding: 12px 5px; border-radius: 10px; cursor: pointer; font-size: 0.85rem; text-align: center; }
         .server-item.active { border-color: #00ff00; background: rgba(0, 255, 0, 0.15); color: #00ff00; font-weight: bold; }
-        .server-item.disabled { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
 
         .price-tag { background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; margin-bottom: 15px; text-align: center; border: 1px dashed #444; }
         input { width: 100%; padding: 15px; background: #000; border: 1px solid #333; color: #00ff00; border-radius: 10px; margin-bottom: 12px; box-sizing: border-box; }
@@ -74,7 +72,7 @@
 
 <div class="container">
     <div id="home">
-        <h1 onclick="adClick()" style="text-align:center; color:#00ff00; font-size:1.5rem;">SMM TIKTOK VIỆT NAM 🇻🇳</h1>
+        <h1 id="title-main" onclick="adClick()" style="text-align:center; color:#00ff00; font-size:1.5rem; cursor:pointer;">SMM TIKTOK VIỆT NAM 🇻🇳</h1>
         <div class="product-grid">
             <div class="product-card" onclick="openSv('Tim')">1. Tăng Tim</div>
             <div class="product-card" onclick="openSv('Follow')">2. Follow</div>
@@ -90,10 +88,10 @@
         <h2 id="sv-name" style="color:#00ff00; margin:0 0 10px 0;">Dịch vụ</h2>
         
         <div class="server-grid">
-            <div class="server-item active" id="btn-tây" onclick="setReg(this, 'tây')">S1-Tây</div>
-            <div class="server-item" id="btn-việt" onclick="setReg(this, 'việt')">S2-Việt</div>
-            <div class="server-item" id="btn-bot" onclick="setReg(this, 'bot')">S3-Bot</div>
-            <div class="server-item" id="btn-ảo" onclick="setReg(this, 'ảo')">S4-Ảo</div>
+            <div class="server-item active" onclick="setReg(this, 'tây')">S1-Tây</div>
+            <div class="server-item" onclick="setReg(this, 'việt')">S2-Việt</div>
+            <div class="server-item" onclick="setReg(this, 'bot')">S3-Bot</div>
+            <div class="server-item" onclick="setReg(this, 'ảo')">S4-Ảo</div>
         </div>
 
         <div class="price-tag">
@@ -106,6 +104,21 @@
         <div style="text-align:right; margin-bottom:15px; font-weight:bold;">TỔNG: <span id="total" style="color:#00ff00; font-size:1.2rem;">0</span>đ</div>
         <button class="btn-main" onclick="order()">MUA NGAY</button>
     </div>
+
+    <div id="admin-login" class="panel">
+        <div class="close-btn" onclick="goHome()">×</div>
+        <h3 style="text-align:center; color:#00ff00;">XÁC MINH ADMIN</h3>
+        <input type="password" id="ad-pass" placeholder="Nhập mật khẩu quản trị...">
+        <button class="btn-main" onclick="checkAd()">ĐĂNG NHẬP ADMIN</button>
+    </div>
+
+    <div id="admin-panel" class="panel">
+        <div class="close-btn" onclick="goHome()">×</div>
+        <h3 style="text-align:center; color:#00ff00;">QUẢN TRỊ VIÊN</h3>
+        <p style="font-size:12px; text-align:center; color:#888;">Quản lý hệ thống nạp và mã</p>
+        <button class="btn-main" onclick="alert('Đã kích hoạt tạo 2000 mã Giftcode thành công!')" style="margin-bottom:10px;">TẠO 2000 MÃ GIFTCODE</button>
+        <button class="btn-main" style="background:#222; color:#fff;" onclick="alert('Tính năng đang cập nhật!')">XEM LỊCH SỬ ĐƠN</button>
+    </div>
 </div>
 
 <div class="popup" id="qr-pop">
@@ -115,15 +128,14 @@
 
 <div class="popup" id="gift-pop">
     <h3>MÃ QUÀ TẶNG</h3>
-    <input type="text" placeholder="Nhập mã...">
-    <button class="btn-main" onclick="alert('Mã không hợp lệ!')">NHẬN</button>
+    <input type="text" placeholder="Nhập mã của bạn...">
+    <button class="btn-main" onclick="alert('Mã không hợp lệ hoặc đã sử dụng!')">NHẬN TIỀN</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
     particlesJS("particles-js", {"particles":{"number":{"value":40},"color":{"value":"#00ff00"},"size":{"value":2},"move":{"speed":1}}});
 
-    // BẢNG GIÁ CHUẨN
     const prices = {
         'Tim': { 'tây': 1, 'việt': 1.2, 'bot': 0.5, 'ảo': 0.6, min: 20 },
         'Follow': { 'việt': 23, 'tây': 13, 'bot': 5, 'ảo': 4, min: 20 },
@@ -138,6 +150,7 @@
     function handleAuth() {
         const u = document.getElementById('auth-user').value;
         const p = document.getElementById('auth-pass').value;
+        if(!u || !p) return alert("Vui lòng điền đủ!");
         if(isRegMode) { localStorage.setItem('u_'+u, p); alert("Đăng ký thành công!"); toggleAuth(false); }
         else {
             if(localStorage.getItem('u_'+u) === p || (u==='admin' && p==='123')) {
@@ -145,7 +158,7 @@
                 document.getElementById('main-header').style.display = 'flex';
                 document.getElementById('home').style.display = 'block';
                 document.getElementById('user-display').innerText = u;
-            } else { alert("Sai thông tin!"); }
+            } else { alert("Sai tài khoản hoặc mật khẩu!"); }
         }
     }
 
@@ -156,6 +169,13 @@
         document.getElementById('home').style.display = 'none';
         document.getElementById('service-detail').style.display = 'block';
         document.getElementById('sv-name').innerText = "Tăng " + cat;
+        
+        const linkInput = document.getElementById('tk-link');
+        if(cat === 'Follow') {
+            linkInput.placeholder = "Nhập ID TikTok (Ví dụ: @huy_smm)...";
+        } else {
+            linkInput.placeholder = "Dán link TikTok chuẩn...";
+        }
         updateUI();
     }
 
@@ -184,16 +204,39 @@
     }
 
     function showPopup(id) { closeAll(); document.getElementById(id).style.display = 'block'; document.getElementById('over').style.display = 'block'; }
+    
     function closeAll() { 
         document.getElementById('side').classList.remove('active');
         document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
         document.getElementById('over').style.display = 'none';
     }
 
-    function goHome() { document.querySelectorAll('.panel, #home').forEach(e => e.style.display = 'none'); document.getElementById('home').style.display = 'block'; }
+    function goHome() { 
+        document.querySelectorAll('.panel, #home').forEach(e => e.style.display = 'none'); 
+        document.getElementById('home').style.display = 'block'; 
+    }
+
+    function adClick() { 
+        adCount++; 
+        if(adCount >= 10) { 
+            adCount = 0; 
+            document.querySelectorAll('.panel, #home').forEach(e => e.style.display = 'none');
+            document.getElementById('admin-login').style.display = 'block'; 
+        } 
+    }
+
+    function checkAd() { 
+        if(document.getElementById('ad-pass').value === "HuySMM@2026#Vip") { 
+            document.getElementById('admin-login').style.display = 'none'; 
+            document.getElementById('admin-panel').style.display = 'block'; 
+        } else { alert("Mật khẩu Admin sai!"); } 
+    }
+
     function order() {
-        if(!document.getElementById('tk-link').value.includes("tiktok.com")) return alert("Link không hợp lệ!");
-        alert("Đã nhận đơn!"); goHome();
+        const val = document.getElementById('tk-link').value;
+        if(!val) return alert("Vui lòng nhập thông tin!");
+        alert("Đã nhận đơn cho: " + val); 
+        goHome();
     }
 </script>
 </body>
