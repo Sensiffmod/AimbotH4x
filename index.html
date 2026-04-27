@@ -3,284 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H4X PANEL - VIP GAME TOOL</title>
+    <title>SENSI PANEL - Premium</title>
     <style>
         :root {
-            --bg-color: #02050e; /* Màu nền tối hắc cơ */
-            --card-bg: rgba(13, 20, 39, 0.9); /* Nền khối có độ trong suốt */
-            --border-color: rgba(0, 243, 255, 0.4); /* Màu viền xanh neon mờ */
-            --glow-color: rgba(0, 243, 255, 0.8); /* Màu ánh đèn neon */
-            --text-main: #ffffff;
-            --text-sub: #8e99b0;
-            --purple-btn: #8e44ad; /* Nút Gửi OTP màu tím */
-            --red-btn: #c0392b; /* Nút Hủy màu đỏ */
+            --bg: #0f0c1d;
+            --card-bg: #1a162e;
+            --primary: linear-gradient(90deg, #ff00cc, #3333ff);
+            --accent: #ff007b;
+            --text: #ffffff;
+            --text-dim: #a0a0a0;
         }
 
         body {
-            background-color: var(--bg-color);
-            background-image: linear-gradient(180deg, #02050e 0%, #0a1127 100%);
-            color: var(--text-main);
-            font-family: 'Montserrat', sans-serif; /* Phông chữ hiện đại */
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
             margin: 0;
             display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Thêm hiệu ứng lưới nền mờ */
-        body::before {
-            content: "";
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-            z-index: -1;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 360px;
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
             flex-direction: column;
-            gap: 15px;
-        }
-
-        /* Header */
-        .header {
-            display: flex;
             align-items: center;
-            background: rgba(10, 17, 39, 0.7);
-            padding: 10px 15px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
         }
 
-        .menu-icon {
-            font-size: 20px;
-            color: var(--text-sub);
-            cursor: pointer;
-            margin-right: 15px;
+        /* Navbar giống muafollow */
+        .navbar {
+            width: 100%;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(26, 22, 46, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-sizing: border-box;
         }
 
-        .logo-text {
-            font-size: 16px;
-            font-weight: bold;
-            color: #ffffff;
-            text-shadow: 0 0 5px var(--glow-color);
-        }
+        .logo { font-weight: bold; font-size: 1.2rem; background: var(--primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* Các khối chung (Card) */
-        .panel-card {
+        /* Menu Sidebar */
+        .sidebar {
+            height: 100%; width: 0; position: fixed; z-index: 2000;
+            top: 0; left: 0; background-color: #0a0817;
+            overflow-x: hidden; transition: 0.4s; padding-top: 60px;
+        }
+        .sidebar a {
+            padding: 15px 25px; text-decoration: none; font-size: 1.1rem;
+            color: var(--text-dim); display: block; transition: 0.3s;
+            border-bottom: 1px solid #1a162e;
+        }
+        .sidebar a:hover { color: #fff; background: var(--primary); }
+
+        .container { width: 100%; max-width: 450px; padding: 20px; box-sizing: border-box; }
+
+        /* Card Style */
+        .card {
             background: var(--card-bg);
-            border-radius: 12px;
-            padding: 15px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .card-title {
-            color: var(--text-sub);
-            font-size: 10px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 5px;
-        }
-
-        /* Thông Tin Tài Khoản */
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            padding: 5px 0;
-        }
-
-        .info-label { color: var(--text-sub); text-transform: uppercase; }
-        .info-value { color: var(--text-main); font-weight: bold; }
-        .info-value.empty { color: rgba(255,255,255,0.4); }
-
-        /* Hệ thống PIN 6 Số */
-        .pin-container {
-            display: flex;
-            justify-content: space-between;
-            margin: 15px 0;
-            gap: 8px;
-        }
-
-        .pin-box {
-            width: 40px;
-            height: 40px;
-            background: #060a17;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: bold;
-            color: #ffffff;
-            box-shadow: inset 0 0 5px rgba(0, 243, 255, 0.2);
-        }
-
-        /* Đổi Email */
-        .email-input-box {
-            position: relative;
-            margin-bottom: 12px;
-        }
-
-        .email-input {
+        .btn-gradient {
             width: 100%;
-            background: #060a17;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 12px 15px;
-            color: #ffffff;
-            font-size: 13px;
-            box-sizing: border-box;
-            outline: none;
-        }
-
-        .email-input::placeholder { color: #505a6f; }
-
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
+            background: var(--primary);
             border: none;
-            color: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            color: white;
             font-weight: bold;
-            font-size: 13px;
             cursor: pointer;
-            text-transform: uppercase;
-            margin-top: 8px;
+            font-size: 1rem;
             transition: 0.3s;
+            margin-top: 10px;
         }
+        .btn-gradient:hover { transform: translateY(-2px); opacity: 0.9; }
 
-        .btn-purple { background-color: var(--purple-btn); }
-        .btn-purple:hover { background-color: #9b59b6; }
-
-        .btn-red { background-color: var(--red-btn); }
-        .btn-red:hover { background-color: #e74c3c; }
-
-        /* Menu thả xuống (Accordion) */
-        .accordion {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .acc-item {
-            background: rgba(10, 17, 39, 0.5);
-            border-radius: 8px;
-            border: 1px solid rgba(0, 243, 255, 0.2);
-        }
-
-        .acc-header {
-            padding: 12px;
+        /* Stats Row */
+        .stat-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            cursor: pointer;
-            font-size: 11px;
-            color: var(--text-main);
-            text-transform: uppercase;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
+        .stat-label { color: var(--text-dim); font-size: 0.9rem; }
+        .stat-value { color: #00ffcc; font-weight: bold; }
 
-        .acc-icon { font-size: 8px; color: var(--text-sub); }
-
-        .acc-content {
-            padding: 0 12px;
-            display: none; /* Ẩn lúc đầu */
-            color: var(--text-sub);
-            font-size: 11px;
-            padding-bottom: 12px;
+        /* Switch UI */
+        .switch { position: relative; display: inline-block; width: 45px; height: 24px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #2a244a; transition: .4s; border-radius: 34px;
         }
+        .slider:before {
+            position: absolute; content: ""; height: 18px; width: 18px;
+            left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%;
+        }
+        input:checked + .slider { background: var(--primary); }
+        input:checked + .slider:before { transform: translateX(21px); }
 
-        /* Nút phụ ở cuối */
-        .sub-link-btn {
-            text-align: center;
-            font-size: 10px;
-            color: var(--border-color);
-            margin-top: 10px;
-            cursor: pointer;
-            text-decoration: underline;
+        .device-tag {
+            display: inline-block;
+            background: rgba(255, 0, 123, 0.1);
+            color: var(--accent);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
 
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" style="font-size: 2rem; text-align: right;" onclick="closeNav()">×</a>
+    <a href="#" onclick="setDevice('iPhone 15 Pro Max')">iPhone Series</a>
+    <a href="#" onclick="setDevice('Samsung S24 Ultra')">Samsung Series</a>
+    <a href="#" onclick="setDevice('Oppo Reno 11')">Oppo Series</a>
+    <a href="#" onclick="setDevice('Vivo V30')">Vivo Series</a>
+    <a href="#" onclick="setDevice('Xiaomi 14')">Xiaomi Series</a>
+</div>
+
+<div class="navbar">
+    <div onclick="openNav()" style="cursor:pointer; font-size: 1.5rem;">☰</div>
+    <div class="logo">SENSI PANEL</div>
+    <div style="font-size: 1.2rem;">👤</div>
+</div>
+
 <div class="container">
-    <div class="header">
-        <div class="menu-icon">☰</div>
-        <div class="logo-text">H4X PANEL - MODTOOL</div>
+    <div class="card" style="text-align: center;">
+        <div class="device-tag" id="tagDevice">CHƯA XÁC ĐỊNH</div>
+        <h3 style="margin: 5px 0;">Hệ thống tối ưu Sensitivity</h3>
+        <p style="color: var(--text-dim); font-size: 0.8rem;">Vui lòng chọn thiết bị ở Menu để lấy mã</p>
     </div>
 
-    <div class="panel-card">
-        <div class="card-title">Xác thực hệ thống</div>
-        <div class="pin-container">
-            <div class="pin-box"></div>
-            <div class="pin-box"></div>
-            <div class="pin-box"></div>
-            <div class="pin-box"></div>
-            <div class="pin-box"></div>
-            <div class="pin-box"></div>
+    <div class="card" id="statsBox" style="display:none;">
+        <div class="stat-item"><span class="stat-label">🌀 Nhìn xung quanh</span><span class="stat-value" id="v1">0</span></div>
+        <div class="stat-item"><span class="stat-label">🔴 Red Dot Sight</span><span class="stat-value" id="v2">0</span></div>
+        <div class="stat-item"><span class="stat-label">🔭 Scope 2x</span><span class="stat-value" id="v3">0</span></div>
+        <div class="stat-item"><span class="stat-label">🔭 Scope 4x</span><span class="stat-value" id="v4">0</span></div>
+        <div class="stat-item"><span class="stat-label">🔥 Nút bắn tối ưu</span><span class="stat-value" id="v5">0%</span></div>
+    </div>
+
+    <div class="card">
+        <h4 style="margin-top: 0; color: var(--accent);">HỖ TRỢ CHIẾN ĐẤU</h4>
+        <div class="stat-item">
+            <span class="stat-label">Bám tâm Desert Eagle</span>
+            <label class="switch"><input type="checkbox" onchange="play()"><span class="slider"></span></label>
         </div>
-        <p style="font-size: 11px; color:var(--glow-color); text-align: center;">Vui lòng nhập mã PIN để xác thực.</p>
-    </div>
-
-    <div class="panel-card">
-        <div class="card-title">Thông Tin Tài Khoản</div>
-        <div class="info-row"><span class="info-label">EMAIL HIỆN TẠI</span> <span class="info-value empty">Chua co email</span></div>
-        <div class="info-row"><span class="info-label">EMAIL SẼ ĐỔI</span> <span class="info-value empty">Khong co</span></div>
-        <div class="info-row"><span class="info-label">THỜI GIAN</span> <span class="info-value">0s</span></div>
-    </div>
-
-    <div class="panel-card">
-        <div class="card-title">Đổi Email</div>
-        <div class="email-input-box">
-            <input type="email" class="email-input" placeholder="nhập email mới...">
+        <div class="stat-item">
+            <span class="stat-label">Nhạy tâm UMP</span>
+            <label class="switch"><input type="checkbox" onchange="play()"><span class="slider"></span></label>
         </div>
-        <button class="btn btn-purple" onclick="alert('Đã gửi yêu cầu OTP!')">Gửi OTP</button>
-        <button class="btn btn-red" onclick="alert('Đã hủy yêu cầu.')">Hủy yêu cầu đổi mail</button>
-    </div>
-
-    <div class="panel-card">
-        <div class="accordion">
-            <div class="acc-item">
-                <div class="acc-header" onclick="toggleAcc('bypass')">OTP Bypass (MXT) <span class="acc-icon">▼</span></div>
-                <div id="acc-bypass" class="acc-content">Dùng mã OTP này để bypass bảo mật hệ thống.</div>
-            </div>
-            <div class="acc-item">
-                <div class="acc-header" onclick="toggleAcc('spam')">Login Spam <span class="acc-icon">▼</span></div>
-                <div id="acc-spam" class="acc-content">Gửi nhiều yêu cầu đăng nhập để kiểm tra.</div>
-            </div>
-            <div class="acc-item">
-                <div class="acc-header" onclick="toggleAcc('lock')">Khóa 7 Ngày <span class="acc-icon">▼</span></div>
-                <div id="acc-lock" class="acc-content">Kích hoạt chế độ khóa tạm thời 7 ngày.</div>
-            </div>
+        <div class="stat-item">
+            <span class="stat-label">Tâm ảo Aim Assist</span>
+            <label class="switch"><input type="checkbox" onchange="play()"><span class="slider"></span></label>
         </div>
-        <div class="sub-link-btn">Thêm Email Mới</div>
+        <button class="btn-gradient" onclick="alert('Đã áp dụng cấu hình VIP!')">KÍCH HOẠT NGAY</button>
     </div>
 </div>
 
+<audio id="clickSfx" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+
 <script>
-    // Hàm xử lý Menu thả xuống
-    function toggleAcc(id) {
-        const content = document.getElementById('acc-' + id);
-        // Kiểm tra xem nó có đang hiện không
-        if (content.style.display === 'block') {
-            content.style.display = 'none'; // Ẩn đi
-        } else {
-            // Ẩn tất cả các mục khác trước (để chỉ hiện 1 cái)
-            const allContents = document.querySelectorAll('.acc-content');
-            allContents.forEach(c => c.style.display = 'none');
-            content.style.display = 'block'; // Hiện cái được chọn
-        }
+    function openNav() { document.getElementById("mySidebar").style.width = "280px"; }
+    function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
+    function play() { document.getElementById('clickSfx').play(); }
+
+    function setDevice(name) {
+        play();
+        document.getElementById("tagDevice").innerText = name.toUpperCase();
+        document.getElementById("statsBox").style.display = "block";
+        
+        // Random chỉ số từ 100-200
+        document.getElementById("v1").innerText = Math.floor(Math.random() * 101) + 100;
+        document.getElementById("v2").innerText = Math.floor(Math.random() * 101) + 100;
+        document.getElementById("v3").innerText = Math.floor(Math.random() * 101) + 100;
+        document.getElementById("v4").innerText = Math.floor(Math.random() * 101) + 100;
+        document.getElementById("v5").innerText = Math.floor(Math.random() * 21) + 35 + "%";
+        
+        closeNav();
     }
 </script>
 
