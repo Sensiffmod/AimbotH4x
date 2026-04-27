@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SENSI PANEL - Web Aimbot Sasuke H4X</title>
+    <title>SENSI PANEL - VIP MOD</title>
     <style>
         :root {
             --bg: #040814;
@@ -21,63 +21,48 @@
             overflow-x: hidden;
         }
 
-        /* Menu 3 gạch */
-        .menu-btn {
-            position: fixed;
-            top: 20px; left: 20px;
-            font-size: 24px; cursor: pointer;
-            z-index: 1000;
-            color: white;
-        }
-
-        /* Sidebar */
+        /* Menu Sidebar */
+        .menu-btn { position: fixed; top: 20px; left: 20px; font-size: 24px; cursor: pointer; z-index: 1000; }
         .sidebar {
-            height: 100%; width: 0;
-            position: fixed; z-index: 2000;
-            top: 0; left: 0;
-            background-color: #0a0f1e;
-            overflow-x: hidden;
-            transition: 0.4s;
-            padding-top: 60px;
+            height: 100%; width: 0; position: fixed; z-index: 2000;
+            top: 0; left: 0; background-color: #0a0f1e;
+            overflow-x: hidden; transition: 0.4s; padding-top: 60px;
             border-right: 1px solid #1e293b;
         }
         .sidebar a {
-            padding: 15px 25px; text-decoration: none;
-            font-size: 18px; color: #8b949e;
-            display: block; transition: 0.3s;
+            padding: 15px 25px; text-decoration: none; font-size: 18px;
+            color: #8b949e; display: block; transition: 0.3s;
         }
         .sidebar a:hover { color: var(--green); background: #161c2d; }
         .sidebar .closebtn { position: absolute; top: 10px; right: 25px; font-size: 36px; }
 
-        .container {
-            display: flex; flex-direction: column; align-items: center;
-            padding: 70px 20px 20px;
-        }
+        .container { display: flex; flex-direction: column; align-items: center; padding: 70px 20px 20px; }
 
-        /* Header UI */
         .header-box {
             background: var(--card); width: 100%; max-width: 380px;
-            padding: 15px; border-radius: 12px;
-            display: flex; align-items: center;
+            padding: 15px; border-radius: 12px; display: flex; align-items: center;
             margin-bottom: 20px; border: 1px solid #1e293b;
         }
         .icon-box {
-            width: 45px; height: 45px;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            border-radius: 10px; display: flex; align-items: center;
-            justify-content: center; font-weight: bold; margin-right: 15px;
+            width: 45px; height: 45px; background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px;
         }
 
-        /* Item UI */
+        /* Stats Panel (Cái mới) */
+        .stats-container {
+            background: var(--card); width: 100%; max-width: 380px;
+            padding: 15px; border-radius: 15px; border: 1px solid #1e293b;
+            margin-bottom: 15px; display: none; /* Hiện sau khi chọn máy */
+        }
+        .stat-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #161c2d; }
+        .stat-val { color: var(--green); font-weight: bold; }
+
+        /* Item Switch */
         .item {
             background: var(--card); width: 100%; max-width: 380px;
-            padding: 12px 15px; border-radius: 12px;
-            margin-bottom: 10px; display: flex;
-            justify-content: space-between; align-items: center;
-            border: 1px solid #1e293b; box-sizing: border-box;
+            padding: 12px 15px; border-radius: 12px; margin-bottom: 10px;
+            display: flex; justify-content: space-between; align-items: center; border: 1px solid #1e293b;
         }
-        .item-info { display: flex; align-items: center; }
-        .gun-icon { font-size: 1.4rem; margin-right: 15px; }
 
         /* Switch UI */
         .switch { position: relative; display: inline-block; width: 40px; height: 22px; }
@@ -93,121 +78,83 @@
         input:checked + .slider { background-color: var(--green); }
         input:checked + .slider:before { transform: translateX(18px); }
 
-        /* Activation & Sensi Panel */
-        .panel-box {
-            background: var(--card); width: 100%; max-width: 380px;
-            border-radius: 15px; padding: 15px;
-            border: 1px solid #1e293b; text-align: center; margin-top: 10px;
-            box-sizing: border-box;
-        }
-        .device-selector {
-            background: #050a14; padding: 10px; border-radius: 8px;
-            margin: 10px 0; font-size: 14px; border: 1px solid #3b82f6;
-        }
-        .key-input {
-            width: 100%; background: #0f172a; border: 1px solid #3b82f6;
-            border-radius: 8px; padding: 10px; color: white;
-            box-sizing: border-box; margin-bottom: 10px; outline: none;
-        }
         .btn-green {
-            width: 100%; background: var(--green); color: #000;
-            border: none; border-radius: 8px; padding: 12px;
-            font-weight: bold; cursor: pointer;
+            width: 100%; background: var(--green); color: #000; border: none;
+            border-radius: 8px; padding: 12px; font-weight: bold; cursor: pointer; margin-top: 10px;
         }
-        .status-success { color: var(--green); margin-top: 10px; display: none; font-weight: bold; }
-
-        .admin-link { margin-top: 30px; font-size: 10px; color: #1e293b; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <audio id="soundClick" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
-<audio id="soundSuccess" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3"></audio>
 
 <div class="menu-btn" onclick="openNav()">☰</div>
 
 <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <a href="#" onclick="changeDevice('IPHONE VIP')">iPhone</a>
-    <a href="#" onclick="changeDevice('SAMSUNG PRO')">Samsung</a>
-    <a href="#" onclick="changeDevice('OPPO GAMING')">Oppo</a>
-    <a href="#" onclick="changeDevice('VIVO S-LINK')">Vivo</a>
-    <a href="#" onclick="changeDevice('XIAOMI MOD')">Xiaomi</a>
+    <a href="#" onclick="generateSensi('IPHONE VIP')">iPhone</a>
+    <a href="#" onclick="generateSensi('SAMSUNG PRO')">Samsung</a>
+    <a href="#" onclick="generateSensi('OPPO GAMING')">Oppo</a>
+    <a href="#" onclick="generateSensi('VIVO S-LINK')">Vivo</a>
+    <a href="#" onclick="generateSensi('XIAOMI MOD')">Xiaomi</a>
 </div>
 
 <div class="container">
     <div class="header-box">
         <div class="icon-box">H4X</div>
-        <div class="header-text">
-            <h2 style="margin:0; font-size: 1rem;">SENSI PANEL MOD</h2>
-            <p style="margin:3px 0 0; font-size: 0.7rem; color:var(--text-dim);">© bản quyền :vuafile🍏</p>
+        <div>
+            <h2 style="margin:0; font-size: 1rem;">SENSI PANEL</h2>
+            <p id="deviceDisplay" style="margin:3px 0 0; font-size: 0.75rem; color:var(--green);">VUI LÒNG CHỌN MÁY ☰</p>
         </div>
     </div>
 
-    <div class="item">
-        <div class="item-info"><span class="gun-icon">🔫</span><div><h4 style="margin:0;font-size:0.8rem;">DESERT EAGLE</h4><p style="margin:0;font-size:0.7rem;color:var(--text-dim);">Bám tâm 90%</p></div></div>
-        <label class="switch"><input type="checkbox" onchange="playClick()"><span class="slider"></span></label>
-    </div>
-    <div class="item">
-        <div class="item-info"><span class="gun-icon">🔫</span><div><h4 style="margin:0;font-size:0.8rem;">UMP TIỂU LIÊN</h4><p style="margin:0;font-size:0.7rem;color:var(--text-dim);">Nhạy tâm 90%</p></div></div>
-        <label class="switch"><input type="checkbox" onchange="playClick()"><span class="slider"></span></label>
-    </div>
-    <div class="item">
-        <div class="item-info"><span class="gun-icon">🔫</span><div><h4 style="margin:0;font-size:0.8rem;">SHOTGUN M1887</h4><p style="margin:0;font-size:0.7rem;color:var(--text-dim);">Đằm tâm kéo 90%</p></div></div>
-        <label class="switch"><input type="checkbox" onchange="playClick()"><span class="slider"></span></label>
-    </div>
-    <div class="item">
-        <div class="item-info"><span class="gun-icon">🔫</span><div><h4 style="margin:0;font-size:0.8rem;">MP40 TIỂU LIÊN</h4><p style="margin:0;font-size:0.7rem;color:var(--text-dim);">Giảm loạn tâm 90%</p></div></div>
-        <label class="switch"><input type="checkbox" onchange="playClick()"><span class="slider"></span></label>
-    </div>
-    <div class="item">
-        <div class="item-info"><span class="gun-icon">🎯</span><div><h4 style="margin:0;font-size:0.8rem;">TÂM ẢO AIM</h4><p style="margin:0;font-size:0.7rem;color:var(--text-dim);">Hỗ trợ ngắm</p></div></div>
-        <label class="switch"><input type="checkbox" onchange="playClick()"><span class="slider"></span></label>
+    <div id="statsPanel" class="stats-container">
+        <div class="stat-row"><span>🌀 Nhìn xung quanh:</span> <span class="stat-val" id="val1">0</span></div>
+        <div class="stat-row"><span>🔴 Red Dot:</span> <span class="stat-val" id="val2">0</span></div>
+        <div class="stat-row"><span>🔭 Scope 2x:</span> <span class="stat-val" id="val3">0</span></div>
+        <div class="stat-row"><span>🔭 Scope 4x:</span> <span class="stat-val" id="val4">0</span></div>
+        <div class="stat-row"><span>🔥 Nút bắn:</span> <span class="stat-val" id="val5">0%</span></div>
     </div>
 
-    <div class="panel-box">
-        <p style="font-size: 11px; text-align: left; color: var(--text-dim);">Thiết bị hiện tại:</p>
-        <div id="deviceName" class="device-selector">CHƯA CHỌN</div>
-        <input type="text" id="keyCode" class="key-input" placeholder="Nhập mã kích hoạt...">
-        <button class="btn-green" onclick="activate()">KÍCH HOẠT NGAY</button>
-        <div id="successMsg" class="status-success">KÍCH HOẠT THÀNH CÔNG!</div>
+    <div class="item">
+        <span>🔫 DESERT EAGLE</span>
+        <label class="switch"><input type="checkbox" onchange="playSfx()"><span class="slider"></span></label>
+    </div>
+    <div class="item">
+        <span>🔫 UMP TIỂU LIÊN</span>
+        <label class="switch"><input type="checkbox" onchange="playSfx()"><span class="slider"></span></label>
+    </div>
+    <div class="item">
+        <span>🎯 TÂM ẢO AIM</span>
+        <label class="switch"><input type="checkbox" onchange="playSfx()"><span class="slider"></span></label>
     </div>
 
-    <div class="admin-link" onclick="adminAccess()">Panel Quản Trị</div>
+    <button class="btn-green" onclick="alert('Đã áp dụng thông số vào Game!')">ÁP DỤNG CẤU HÌNH</button>
 </div>
 
 <script>
-    const validKeys = ["H4X-8K92-P1X7-L001", "H4X-VUAFILE-2026", "GIA-LAP-MOD"];
-    const adminPass = "Admin@VuaFile#2026!H4X";
-
-    function openNav() { document.getElementById("mySidebar").style.width = "250px"; playClick(); }
+    function openNav() { document.getElementById("mySidebar").style.width = "250px"; }
     function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
+    function playSfx() { document.getElementById('soundClick').play(); }
 
-    function changeDevice(name) {
-        document.getElementById("deviceName").innerText = name;
+    function getRandom(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function generateSensi(deviceName) {
+        // Hiện bảng thông số
+        document.getElementById("statsPanel").style.display = "block";
+        document.getElementById("deviceDisplay").innerText = "ĐANG DÙNG: " + deviceName;
+        
+        // Random từ 100 đến 200 cho 4 dòng đầu, riêng nút bắn random từ 30-60 cho chuẩn game
+        document.getElementById("val1").innerText = getRandom(100, 200);
+        document.getElementById("val2").innerText = getRandom(100, 200);
+        document.getElementById("val3").innerText = getRandom(100, 200);
+        document.getElementById("val4").innerText = getRandom(100, 200);
+        document.getElementById("val5").innerText = getRandom(35, 55) + "%";
+
+        playSfx();
         closeNav();
-        playClick();
-    }
-
-    function playClick() {
-        const s = document.getElementById('soundClick');
-        s.currentTime = 0; s.play();
-    }
-
-    function activate() {
-        const key = document.getElementById('keyCode').value;
-        if(validKeys.includes(key)) {
-            document.getElementById('soundSuccess').play();
-            document.getElementById('successMsg').style.display = 'block';
-            alert("Đã nhận diện thiết bị. Chúc bạn chơi game vui vẻ!");
-        } else {
-            alert("Mã sai!");
-        }
-    }
-
-    function adminAccess() {
-        const p = prompt("Nhập mật khẩu Admin:");
-        if(p === adminPass) alert("Danh sách mã:\n" + validKeys.join("\n"));
     }
 </script>
 
