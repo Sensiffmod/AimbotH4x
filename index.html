@@ -3,192 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SENSI PANEL - Premium</title>
-    <style>
-        :root {
-            --bg: #0f0c1d;
-            --card-bg: #1a162e;
-            --primary: linear-gradient(90deg, #ff00cc, #3333ff);
-            --accent: #ff007b;
-            --text: #ffffff;
-            --text-dim: #a0a0a0;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Navbar giống muafollow */
-        .navbar {
-            width: 100%;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(26, 22, 46, 0.8);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-sizing: border-box;
-        }
-
-        .logo { font-weight: bold; font-size: 1.2rem; background: var(--primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-        /* Menu Sidebar */
-        .sidebar {
-            height: 100%; width: 0; position: fixed; z-index: 2000;
-            top: 0; left: 0; background-color: #0a0817;
-            overflow-x: hidden; transition: 0.4s; padding-top: 60px;
-        }
-        .sidebar a {
-            padding: 15px 25px; text-decoration: none; font-size: 1.1rem;
-            color: var(--text-dim); display: block; transition: 0.3s;
-            border-bottom: 1px solid #1a162e;
-        }
-        .sidebar a:hover { color: #fff; background: var(--primary); }
-
-        .container { width: 100%; max-width: 450px; padding: 20px; box-sizing: border-box; }
-
-        /* Card Style */
-        .card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .btn-gradient {
-            width: 100%;
-            background: var(--primary);
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: 0.3s;
-            margin-top: 10px;
-        }
-        .btn-gradient:hover { transform: translateY(-2px); opacity: 0.9; }
-
-        /* Stats Row */
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .stat-label { color: var(--text-dim); font-size: 0.9rem; }
-        .stat-value { color: #00ffcc; font-weight: bold; }
-
-        /* Switch UI */
-        .switch { position: relative; display: inline-block; width: 45px; height: 24px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider {
-            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #2a244a; transition: .4s; border-radius: 34px;
-        }
-        .slider:before {
-            position: absolute; content: ""; height: 18px; width: 18px;
-            left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%;
-        }
-        input:checked + .slider { background: var(--primary); }
-        input:checked + .slider:before { transform: translateX(21px); }
-
-        .device-tag {
-            display: inline-block;
-            background: rgba(255, 0, 123, 0.1);
-            color: var(--accent);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            margin-bottom: 10px;
-        }
-    </style>
+    <title>SMM PANEL - Dịch vụ MXH</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-<div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" style="font-size: 2rem; text-align: right;" onclick="closeNav()">×</a>
-    <a href="#" onclick="setDevice('iPhone 15 Pro Max')">iPhone Series</a>
-    <a href="#" onclick="setDevice('Samsung S24 Ultra')">Samsung Series</a>
-    <a href="#" onclick="setDevice('Oppo Reno 11')">Oppo Series</a>
-    <a href="#" onclick="setDevice('Vivo V30')">Vivo Series</a>
-    <a href="#" onclick="setDevice('Xiaomi 14')">Xiaomi Series</a>
-</div>
+    <header>
+        <div class="menu-icon"><i class="fas fa-bars"></i></div>
+        <div class="logo">SMM PANEL</div>
+        <div class="user-icon"><i class="fas fa-user-circle"></i></div>
+    </header>
 
-<div class="navbar">
-    <div onclick="openNav()" style="cursor:pointer; font-size: 1.5rem;">☰</div>
-    <div class="logo">SENSI PANEL</div>
-    <div style="font-size: 1.2rem;">👤</div>
-</div>
-
-<div class="container">
-    <div class="card" style="text-align: center;">
-        <div class="device-tag" id="tagDevice">CHƯA XÁC ĐỊNH</div>
-        <h3 style="margin: 5px 0;">Hệ thống tối ưu Sensitivity</h3>
-        <p style="color: var(--text-dim); font-size: 0.8rem;">Vui lòng chọn thiết bị ở Menu để lấy mã</p>
-    </div>
-
-    <div class="card" id="statsBox" style="display:none;">
-        <div class="stat-item"><span class="stat-label">🌀 Nhìn xung quanh</span><span class="stat-value" id="v1">0</span></div>
-        <div class="stat-item"><span class="stat-label">🔴 Red Dot Sight</span><span class="stat-value" id="v2">0</span></div>
-        <div class="stat-item"><span class="stat-label">🔭 Scope 2x</span><span class="stat-value" id="v3">0</span></div>
-        <div class="stat-item"><span class="stat-label">🔭 Scope 4x</span><span class="stat-value" id="v4">0</span></div>
-        <div class="stat-item"><span class="stat-label">🔥 Nút bắn tối ưu</span><span class="stat-value" id="v5">0%</span></div>
-    </div>
-
-    <div class="card">
-        <h4 style="margin-top: 0; color: var(--accent);">HỖ TRỢ CHIẾN ĐẤU</h4>
-        <div class="stat-item">
-            <span class="stat-label">Bám tâm Desert Eagle</span>
-            <label class="switch"><input type="checkbox" onchange="play()"><span class="slider"></span></label>
+    <div class="container">
+        <div class="banner">
+            <div class="banner-text">
+                <h2>SMM PANEL</h2>
+                <p>Chuyên cung cấp dịch vụ và giải pháp gia tăng doanh số, nhận diện thương hiệu trên MXH.</p>
+            </div>
+            <div class="banner-img">
+                <img src="https://via.placeholder.com/100" alt="icon">
+            </div>
         </div>
-        <div class="stat-item">
-            <span class="stat-label">Nhạy tâm UMP</span>
-            <label class="switch"><input type="checkbox" onchange="play()"><span class="slider"></span></label>
+
+        <div class="auth-group">
+            <button class="btn btn-login">ĐĂNG NHẬP</button>
+            <button class="btn btn-register">ĐĂNG KÝ</button>
         </div>
-        <div class="stat-item">
-            <span class="stat-label">Tâm ảo Aim Assist</span>
-            <label class="switch"><input type="checkbox" onchange="play()"><span class="slider"></span></label>
+
+        <div class="stats">
+            <div><strong>167.475</strong><br>Người dùng</div>
+            <div><strong>828.153</strong><br>Đơn hàng</div>
+            <div><strong>56</strong><br>Dịch vụ</div>
         </div>
-        <button class="btn-gradient" onclick="alert('Đã áp dụng cấu hình VIP!')">KÍCH HOẠT NGAY</button>
+
+        <h3 class="section-title"><i class="fab fa-tiktok"></i> Dịch vụ TikTok</h3>
+        <div class="service-grid">
+            <div class="card"><i class="fab fa-tiktok color-tk"></i> Tăng Like ❤️</div>
+            <div class="card"><i class="fab fa-tiktok color-tk"></i> Tăng Follow 👤</div>
+            <div class="card"><i class="fab fa-tiktok color-tk"></i> Tăng View ▶️</div>
+            <div class="card"><i class="fab fa-tiktok color-tk"></i> Tăng Chia Sẻ ➡️</div>
+        </div>
+
+        <h3 class="section-title"><i class="fab fa-facebook"></i> Dịch vụ Facebook</h3>
+        <div class="service-grid">
+            <div class="card"><i class="fab fa-facebook color-fb"></i> Tăng Like 👍</div>
+            <div class="card"><i class="fab fa-facebook color-fb"></i> Tăng Follow 👤</div>
+            <div class="card"><i class="fab fa-facebook color-fb"></i> Tăng View Video 👁️</div>
+            <div class="card"><i class="fab fa-facebook color-fb"></i> Tăng Bình Luận 💬</div>
+        </div>
+
+        <h3 class="section-title"><i class="fab fa-instagram"></i> Dịch vụ Instagram</h3>
+        <div class="service-grid">
+            <div class="card"><i class="fab fa-instagram color-ig"></i> Tăng Like ❤️</div>
+            <div class="card"><i class="fab fa-instagram color-ig"></i> Tăng Follow 👤</div>
+            <div class="card"><i class="fab fa-instagram color-ig"></i> Tăng View 👁️</div>
+        </div>
+
+        <h3 class="section-title">Cấp bậc & Ưu đãi</h3>
+        <div class="tier-grid">
+            <div class="tier-card member">
+                <div class="tier-header"><i class="fas fa-user"></i> Thành viên</div>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Tăng Free: 1 lượt / ngày</li>
+                    <li><i class="fas fa-times-circle gray"></i> Giảm giá dịch vụ</li>
+                    <li><i class="fas fa-times-circle gray"></i> Tạo website riêng</li>
+                </ul>
+            </div>
+            <div class="tier-card ctv">
+                <div class="tier-header"><i class="fas fa-bookmark"></i> CTV</div>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Tăng Free: 5 lượt / ngày</li>
+                    <li><i class="fas fa-check-circle"></i> Giảm giá dịch vụ</li>
+                    <li><i class="fas fa-check-circle"></i> Tạo website riêng</li>
+                </ul>
+            </div>
+            <div class="tier-card agency">
+                <div class="tier-header"><i class="fas fa-medal"></i> ĐẠI LÝ</div>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Tăng Free: 10 lượt / ngày</li>
+                    <li><i class="fas fa-check-circle"></i> Giảm giá dịch vụ</li>
+                    <li><i class="fas fa-check-circle"></i> Tạo website riêng</li>
+                    <li><i class="fas fa-check-circle"></i> Hỗ trợ riêng</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="contact-footer">
+            <p>Liên hệ hỗ trợ <i class="fas fa-phone-alt"></i> Zalo: <strong>0837888626</strong></p> 
+            </div>
     </div>
-</div>
-
-<audio id="clickSfx" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
-
-<script>
-    function openNav() { document.getElementById("mySidebar").style.width = "280px"; }
-    function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
-    function play() { document.getElementById('clickSfx').play(); }
-
-    function setDevice(name) {
-        play();
-        document.getElementById("tagDevice").innerText = name.toUpperCase();
-        document.getElementById("statsBox").style.display = "block";
-        
-        // Random chỉ số từ 100-200
-        document.getElementById("v1").innerText = Math.floor(Math.random() * 101) + 100;
-        document.getElementById("v2").innerText = Math.floor(Math.random() * 101) + 100;
-        document.getElementById("v3").innerText = Math.floor(Math.random() * 101) + 100;
-        document.getElementById("v4").innerText = Math.floor(Math.random() * 101) + 100;
-        document.getElementById("v5").innerText = Math.floor(Math.random() * 21) + 35 + "%";
-        
-        closeNav();
-    }
-</script>
 
 </body>
 </html>
