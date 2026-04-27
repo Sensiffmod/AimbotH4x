@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Aimbot Sasuke H4X - VuaFile</title>
+    <style>
+        :root {
+            --bg: #040814;
+            --card: #0d1221;
+            --blue: #3b82f6;
+            --green: #22c55e;
+            --text-dim: #94a3b8;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Header giống hình */
+        .header {
+            background: var(--card);
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border: 1px solid #1e293b;
+        }
+
+        .icon {
+            width: 45px; height: 45px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; margin-right: 15px;
+        }
+
+        .header-text h2 { margin: 0; font-size: 0.95rem; }
+        .header-text p { margin: 3px 0 0; font-size: 0.75rem; color: var(--text-dim); }
+
+        /* Item list */
+        .item {
+            background: var(--card);
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #1e293b;
+        }
+
+        .item-info { display: flex; align-items: center; }
+        .gun-icon { font-size: 1.4rem; margin-right: 15px; filter: saturate(2); }
+        .item-text h4 { margin: 0; font-size: 0.85rem; text-transform: uppercase; }
+        .item-text p { margin: 2px 0 0; font-size: 0.7rem; color: var(--text-dim); }
+
+        /* Switch UI */
+        .switch {
+            position: relative; display: inline-block;
+            width: 40px; height: 22px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #334155;
+            transition: .4s; border-radius: 20px;
+        }
+        .slider:before {
+            position: absolute; content: "";
+            height: 16px; width: 16px;
+            left: 3px; bottom: 3px;
+            background-color: white; transition: .4s; border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--green); }
+        input:checked + .slider:before { transform: translateX(18px); }
+
+        /* Input & Button */
+        .action-area { margin-top: 20px; text-align: center; }
+        .key-input {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid var(--blue);
+            border-radius: 8px;
+            padding: 12px;
+            color: white;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .btn-main {
+            width: 100%;
+            background: var(--green);
+            color: white; border: none;
+            border-radius: 8px; padding: 12px;
+            font-weight: bold; cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .status {
+            color: var(--green);
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .admin-btn {
+            margin-top: 40px;
+            color: #1e293b;
+            font-size: 0.6rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="icon">H4X</div>
+        <div class="header-text">
+            <h2>Web Aimbot Sasuke H4X</h2>
+            <p>© bản quyền :vuafile🍏</p>
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="item-info">
+            <span class="gun-icon">🔫</span>
+            <div class="item-text"><h4>DESERT EAGLE</h4><p>Hỗ trợ độ bám tâm 90%</p></div>
+        </div>
+        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+    </div>
+
+    <div class="item">
+        <div class="item-info">
+            <span class="gun-icon">🔫</span>
+            <div class="item-text"><h4>UMP Tiểu Liên</h4><p>Hỗ trợ nhạy tâm 90%</p></div>
+        </div>
+        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+    </div>
+
+    <div class="item">
+        <div class="item-info">
+            <span class="gun-icon">🔫</span>
+            <div class="item-text"><h4>Shotgun M1887</h4><p>Đằm tâm khi kéo 90%</p></div>
+        </div>
+        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+    </div>
+
+    <div class="item">
+        <div class="item-info">
+            <span class="gun-icon">🔫</span>
+            <div class="item-text"><h4>MP40 Tiểu Liên</h4><p>Giảm loạn tâm khi kéo 90%</p></div>
+        </div>
+        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+    </div>
+
+    <div class="item">
+        <div class="item-info">
+            <span class="gun-icon">🎯</span>
+            <div class="item-text"><h4>Tâm ảo Aim</h4><p>Hồng tâm hỗ trợ ngắm</p></div>
+        </div>
+        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+    </div>
+
+    <div class="action-area">
+        <input type="text" id="key" class="key-input" placeholder="Nhập mã kích hoạt...">
+        <button class="btn-main" onclick="activate()">Kích Hoạt</button>
+        <div id="msg" class="status">Thông báo: Kích hoạt thành công!</div>
+    </div>
+
+    <div class="admin-btn" onclick="openAdmin()">Panel Quản Trị</div>
+</div>
+
+<script>
+    // Danh sách 10 mã mẫu (Bạn có thể thêm cho đủ 100)
+    const keys = ["H4X-8K92-P1X7-L001", "H4X-A2B3-C4D5-E6F7", "H4X-VUAFILE-9999", "H4X-SASUKE-2026"];
+    const adminPass = "Admin@VuaFile#2026!H4X";
+
+    function activate() {
+        const input = document.getElementById('key').value;
+        if(keys.includes(input)) {
+            document.getElementById('msg').style.display = 'block';
+            alert("Kích hoạt thành công!");
+        } else {
+            alert("Mã sai hoặc không tồn tại!");
+        }
+    }
+
+    function openAdmin() {
+        const p = prompt("Nhập mã Admin:");
+        if(p === adminPass) {
+            alert("Danh sách mã:\n" + keys.join("\n"));
+        } else {
+            alert("Biến!");
+        }
+    }
+</script>
+
+</body>
+</html>
+ 
