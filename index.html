@@ -3,217 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMM PANEL - Dịch vụ MXH</title>
+    <title>SMM TikTok - Hệ Thống Mạnh Nhất VN</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* --- CSS GỘP CHUNG VÀO ĐÂY ĐỂ TRÁNH LỖI TRẮNG TRANG --- */
-        :root {
-            --primary-color: #26c6da;
-            --dark-bg: #1a1a1a;
-            --light-blue: #e8eff9;
-            --text-dark: #333;
-        }
-
-        body {
-            font-family: 'Segoe UI', Roboto, sans-serif;
+        /* --- CSS STYLE --- */
+        body, html {
             margin: 0;
             padding: 0;
-            background-color: #f8fafc;
-            color: var(--text-dark);
+            width: 100%;
+            height: 100%;
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
         }
 
-        /* Header */
-        header {
-            background: #fff;
-            padding: 10px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
+        /* Nền hạt bụi */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
             top: 0;
-            z-index: 1000;
+            left: 0;
         }
-        .logo-box { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 18px; }
-        .logo-box img { width: 30px; border-radius: 5px; }
 
-        /* Container chính */
-        .container { padding: 15px; max-width: 500px; margin: 0 auto; }
-
-        /* Banner đen ngầu */
-        .banner {
-            background: #000;
-            color: #fff;
-            padding: 20px;
-            border-radius: 15px;
+        .container {
+            position: relative;
+            z-index: 2;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            margin-bottom: 15px;
+            min-height: 100vh;
+            padding: 20px;
         }
-        .banner-text h2 { color: var(--primary-color); margin: 0 0 5px 0; font-size: 20px; }
-        .banner-text p { font-size: 12px; line-height: 1.4; color: #ccc; margin: 0; }
-        .banner-icons { display: flex; flex-wrap: wrap; width: 80px; gap: 5px; }
-        .banner-icons i { color: #ff4757; font-size: 10px; }
 
-        /* Nút đăng nhập/ký */
-        .auth-btns { display: flex; gap: 10px; margin-bottom: 15px; }
-        .btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        .btn-login { background: #4db6ac; }
-        .btn-register { background: #00bcd4; }
-
-        /* Thống kê */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            background: var(--light-blue);
-            padding: 15px 5px;
-            border-radius: 10px;
+        /* Panel chung */
+        .panel {
+            background: rgba(15, 15, 15, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
             text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        h2 {
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        .input-group {
+            position: relative;
             margin-bottom: 20px;
         }
-        .stats-item strong { display: block; font-size: 16px; color: #2c3e50; }
-        .stats-item span { font-size: 11px; color: #7f8c8d; }
 
-        /* Mục dịch vụ */
-        .section-title { font-size: 16px; font-weight: bold; margin: 15px 0 10px; display: flex; align-items: center; gap: 8px; }
-        .grid-services { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        
-        .card {
-            background: #fff;
-            padding: 12px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 13px;
-            font-weight: 500;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: 0.2s;
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 8px;
+            outline: none;
+            box-sizing: border-box;
+            transition: 0.3s;
         }
-        .card:active { transform: scale(0.95); }
-        .card i { font-size: 18px; }
-        .tk-icon { color: #000; }
-        .fb-icon { color: #1877f2; }
-        .ig-icon { color: #e1306c; }
 
-        /* Cấp bậc */
-        .tier-card {
-            background: #fff;
-            border-radius: 12px;
-            margin-bottom: 15px;
+        input:focus {
+            border-color: #00ff00;
+            background: rgba(0, 255, 0, 0.05);
+        }
+
+        /* Icon con mắt */
+        .eye-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+            transition: 0.3s;
+        }
+
+        .eye-icon:hover { color: #00ff00; }
+
+        .btn-main {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 8px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .btn-main:hover {
+            background: #05ff05;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px #00ff00;
+        }
+
+        .links {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .links a {
+            color: #aaa;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .links a:hover { color: #00ff00; }
+
+        /* Màn hình Dashboard sau khi đăng nhập */
+        #dashboard {
+            display: none;
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glow-title {
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 0 0 20px #00ff00;
+            margin-bottom: 50px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            padding: 40px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        .tier-header { padding: 10px; color: #fff; font-weight: bold; text-align: center; }
-        .bg-member { background: #5c6bc0; }
-        .bg-ctv { background: #26a69a; }
-        .bg-daily { background: #263238; }
 
-        .tier-body { padding: 15px; list-style: none; margin: 0; font-size: 13px; }
-        .tier-body li { margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .fa-check-circle { color: #4caf50; }
-        .fa-times-circle { color: #e74c3c; }
+        .product-card:hover {
+            border-color: #00ff00;
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.15);
+            background: rgba(0, 255, 0, 0.05);
+        }
 
-        /* Footer */
-        .footer { text-align: center; padding: 20px; font-size: 14px; color: #666; border-top: 1px solid #eee; margin-top: 20px; }
-        .footer strong { color: #000; }
+        .product-card h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .product-card::before {
+            content: '✓';
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            font-size: 5rem;
+            color: rgba(0, 255, 0, 0.05);
+        }
+
+        @media (max-width: 600px) {
+            .glow-title { font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-box">
-            <i class="fas fa-bars"></i>
-            <span>SMM PANEL</span>
-        </div>
-        <div class="user-icon"><i class="fas fa-user-circle fa-lg"></i></div>
-    </header>
+    <div id="particles-js"></div>
 
     <div class="container">
-        <div class="banner">
-            <div class="banner-text">
-                <h2>SMM PANEL</h2>
-                <p>Chuyên cung cấp dịch vụ và giải pháp gia tăng doanh số, nhận diện thương hiệu trên MXH. Hệ thống hỗ trợ giúp bạn tăng tương tác...</p>
+        <div id="login-box" class="panel">
+            <h2>HỆ THỐNG SMM</h2>
+            <div class="input-group">
+                <input type="text" placeholder="Tên đăng nhập" id="user">
             </div>
-            <div class="banner-icons">
-                <i class="fas fa-heart"></i> <i class="fas fa-heart"></i> <i class="fas fa-heart"></i>
-                <i class="fas fa-heart"></i> <i class="fas fa-heart"></i> <i class="fas fa-heart"></i>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Mật khẩu">
+                <i class="fas fa-eye eye-icon" id="togglePassword"></i>
+            </div>
+            <button class="btn-main" onclick="login()">ĐĂNG NHẬP NGAY</button>
+            <div class="links">
+                <a href="#">Đăng ký tài khoản</a> | <a href="#">Quên mật khẩu?</a>
             </div>
         </div>
 
-        <div class="auth-btns">
-            <button class="btn btn-login">ĐĂNG NHẬP</button>
-            <button class="btn btn-register">ĐĂNG KÝ</button>
-        </div>
-
-        <div class="stats-bar">
-            <div class="stats-item"><strong>167.475</strong><span>Người dùng</span></div>
-            <div class="stats-item"><strong>828.153</strong><span>Đơn hàng</span></div>
-            <div class="stats-item"><strong>56</strong><span>Dịch vụ</span></div>
-        </div>
-
-        <div class="section-title"><i class="fab fa-tiktok"></i> Dịch vụ TikTok</div>
-        <div class="grid-services">
-            <div class="card"><i class="fab fa-tiktok tk-icon"></i> Tăng Like ❤️</div>
-            <div class="card"><i class="fab fa-tiktok tk-icon"></i> Tăng Follow 👤</div>
-            <div class="card"><i class="fab fa-tiktok tk-icon"></i> Tăng View ▶️</div>
-            <div class="card"><i class="fab fa-tiktok tk-icon"></i> Nạp Xu TikTok 🪙</div>
-        </div>
-
-        <div class="section-title"><i class="fab fa-facebook"></i> Dịch vụ Facebook</div>
-        <div class="grid-services">
-            <div class="card"><i class="fab fa-facebook fb-icon"></i> Tăng Like 👍</div>
-            <div class="card"><i class="fab fa-facebook fb-icon"></i> Tăng Follow 👤</div>
-            <div class="card"><i class="fab fa-facebook fb-icon"></i> Tăng View Video 👁️</div>
-            <div class="card"><i class="fab fa-facebook fb-icon"></i> Tăng Bình Luận 💬</div>
-        </div>
-
-        <div class="section-title">Cấp bậc & Ưu đãi</div>
-        
-        <div class="tier-card">
-            <div class="tier-header bg-member"><i class="fas fa-user"></i> Thành viên</div>
-            <ul class="tier-body">
-                <li><i class="fas fa-check-circle"></i> Tăng Free: 1 lượt / ngày</li>
-                <li><i class="fas fa-times-circle"></i> Giảm giá dịch vụ</li>
-                <li><i class="fas fa-times-circle"></i> Tạo website riêng</li>
-            </ul>
-        </div>
-
-        <div class="tier-card">
-            <div class="tier-header bg-ctv"><i class="fas fa-bookmark"></i> CTV</div>
-            <ul class="tier-body">
-                <li><i class="fas fa-check-circle"></i> Tăng Free: 5 lượt / ngày</li>
-                <li><i class="fas fa-check-circle"></i> Giảm giá dịch vụ</li>
-                <li><i class="fas fa-check-circle"></i> Tạo website riêng</li>
-            </ul>
-        </div>
-
-        <div class="tier-card">
-            <div class="tier-header bg-daily"><i class="fas fa-medal"></i> ĐẠI LÝ</div>
-            <ul class="tier-body">
-                <li><i class="fas fa-check-circle"></i> Tăng Free: 10 lượt / ngày</li>
-                <li><i class="fas fa-check-circle"></i> Giảm giá dịch vụ</li>
-                <li><i class="fas fa-check-circle"></i> Tạo website riêng</li>
-                <li><i class="fas fa-check-circle"></i> Hỗ trợ riêng</li>
-            </ul>
-        </div>
-
-        <div class="footer">
-            Liên hệ hỗ trợ <i class="fab fa-whatsapp"></i> Zalo: <strong>0837888626</strong>
+        <div id="dashboard">
+            <h1 class="glow-title">SMM TIKTOK MẠNH NHẤT VIỆT NAM 🇻🇳</h1>
+            <div class="product-grid">
+                <div class="product-card"><h3>1. Tăng Tim TikTok</h3></div>
+                <div class="product-card"><h3>2. Tăng Follow TikTok</h3></div>
+                <div class="product-card"><h3>3. Tăng View TikTok</h3></div>
+                <div class="product-card"><h3>4. Tăng Lưu TikTok</h3></div>
+                <div class="product-card"><h3>5. Tăng Share TikTok</h3></div>
+                <div class="product-card"><h3>6. Tăng Đăng Lại TikTok</h3></div>
+            </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <script>
+        /* --- JAVASCRIPT --- */
+
+        // 1. Cấu hình hiệu ứng hạt bụi chạy chậm
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#00ff00" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.3, "random": true },
+                "size": { "value": 2, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00ff00", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 0.8, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } }
+            }
+        });
+
+        // 2. Logic hiện/ẩn mật khẩu (Con mắt)
+        const toggleBtn = document.querySelector('#togglePassword');
+        const passwordInput = document.querySelector('#password');
+
+        toggleBtn.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+            this.classList.toggle('fa-eye');
+        });
+
+        // 3. Logic Đăng nhập & Hiện thông báo
+        function login() {
+            // Thông báo theo yêu cầu của bro
+            alert("SMM Tiktok mạnh nhất Việt Nam 🇻🇳");
+            
+            // Chuyển sang màn hình sản phẩm
+            document.getElementById('login-box').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
  
