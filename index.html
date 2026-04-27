@@ -3,158 +3,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SENSI PANEL - VIP MOD</title>
+    <title>H4X PANEL - VIP GAME TOOL</title>
     <style>
         :root {
-            --bg: #040814;
-            --card: #0d1221;
-            --green: #00ff73;
-            --blue: #3b82f6;
-            --text-dim: #94a3b8;
+            --bg-color: #02050e; /* Màu nền tối hắc cơ */
+            --card-bg: rgba(13, 20, 39, 0.9); /* Nền khối có độ trong suốt */
+            --border-color: rgba(0, 243, 255, 0.4); /* Màu viền xanh neon mờ */
+            --glow-color: rgba(0, 243, 255, 0.8); /* Màu ánh đèn neon */
+            --text-main: #ffffff;
+            --text-sub: #8e99b0;
+            --purple-btn: #8e44ad; /* Nút Gửi OTP màu tím */
+            --red-btn: #c0392b; /* Nút Hủy màu đỏ */
         }
 
         body {
-            background-color: var(--bg);
-            color: white;
-            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-color);
+            background-image: linear-gradient(180deg, #02050e 0%, #0a1127 100%);
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif; /* Phông chữ hiện đại */
             margin: 0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Menu Sidebar */
-        .menu-btn { position: fixed; top: 20px; left: 20px; font-size: 24px; cursor: pointer; z-index: 1000; }
-        .sidebar {
-            height: 100%; width: 0; position: fixed; z-index: 2000;
-            top: 0; left: 0; background-color: #0a0f1e;
-            overflow-x: hidden; transition: 0.4s; padding-top: 60px;
-            border-right: 1px solid #1e293b;
-        }
-        .sidebar a {
-            padding: 15px 25px; text-decoration: none; font-size: 18px;
-            color: #8b949e; display: block; transition: 0.3s;
-        }
-        .sidebar a:hover { color: var(--green); background: #161c2d; }
-        .sidebar .closebtn { position: absolute; top: 10px; right: 25px; font-size: 36px; }
-
-        .container { display: flex; flex-direction: column; align-items: center; padding: 70px 20px 20px; }
-
-        .header-box {
-            background: var(--card); width: 100%; max-width: 380px;
-            padding: 15px; border-radius: 12px; display: flex; align-items: center;
-            margin-bottom: 20px; border: 1px solid #1e293b;
-        }
-        .icon-box {
-            width: 45px; height: 45px; background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px;
+        /* Thêm hiệu ứng lưới nền mờ */
+        body::before {
+            content: "";
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
         }
 
-        /* Stats Panel (Cái mới) */
-        .stats-container {
-            background: var(--card); width: 100%; max-width: 380px;
-            padding: 15px; border-radius: 15px; border: 1px solid #1e293b;
-            margin-bottom: 15px; display: none; /* Hiện sau khi chọn máy */
-        }
-        .stat-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #161c2d; }
-        .stat-val { color: var(--green); font-weight: bold; }
-
-        /* Item Switch */
-        .item {
-            background: var(--card); width: 100%; max-width: 380px;
-            padding: 12px 15px; border-radius: 12px; margin-bottom: 10px;
-            display: flex; justify-content: space-between; align-items: center; border: 1px solid #1e293b;
+        .container {
+            width: 100%;
+            max-width: 360px;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        /* Switch UI */
-        .switch { position: relative; display: inline-block; width: 40px; height: 22px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider {
-            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #334155; transition: .4s; border-radius: 20px;
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            background: rgba(10, 17, 39, 0.7);
+            padding: 10px 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
         }
-        .slider:before {
-            position: absolute; content: ""; height: 16px; width: 16px;
-            left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%;
-        }
-        input:checked + .slider { background-color: var(--green); }
-        input:checked + .slider:before { transform: translateX(18px); }
 
-        .btn-green {
-            width: 100%; background: var(--green); color: #000; border: none;
-            border-radius: 8px; padding: 12px; font-weight: bold; cursor: pointer; margin-top: 10px;
+        .menu-icon {
+            font-size: 20px;
+            color: var(--text-sub);
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .logo-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        /* Các khối chung (Card) */
+        .panel-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+        }
+
+        .card-title {
+            color: var(--text-sub);
+            font-size: 10px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 5px;
+        }
+
+        /* Thông Tin Tài Khoản */
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            padding: 5px 0;
+        }
+
+        .info-label { color: var(--text-sub); text-transform: uppercase; }
+        .info-value { color: var(--text-main); font-weight: bold; }
+        .info-value.empty { color: rgba(255,255,255,0.4); }
+
+        /* Hệ thống PIN 6 Số */
+        .pin-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            gap: 8px;
+        }
+
+        .pin-box {
+            width: 40px;
+            height: 40px;
+            background: #060a17;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            box-shadow: inset 0 0 5px rgba(0, 243, 255, 0.2);
+        }
+
+        /* Đổi Email */
+        .email-input-box {
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .email-input {
+            width: 100%;
+            background: #060a17;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 15px;
+            color: #ffffff;
+            font-size: 13px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .email-input::placeholder { color: #505a6f; }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-purple { background-color: var(--purple-btn); }
+        .btn-purple:hover { background-color: #9b59b6; }
+
+        .btn-red { background-color: var(--red-btn); }
+        .btn-red:hover { background-color: #e74c3c; }
+
+        /* Menu thả xuống (Accordion) */
+        .accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .acc-item {
+            background: rgba(10, 17, 39, 0.5);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+        }
+
+        .acc-header {
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 11px;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .acc-icon { font-size: 8px; color: var(--text-sub); }
+
+        .acc-content {
+            padding: 0 12px;
+            display: none; /* Ẩn lúc đầu */
+            color: var(--text-sub);
+            font-size: 11px;
+            padding-bottom: 12px;
+        }
+
+        /* Nút phụ ở cuối */
+        .sub-link-btn {
+            text-align: center;
+            font-size: 10px;
+            color: var(--border-color);
+            margin-top: 10px;
+            cursor: pointer;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-<audio id="soundClick" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
-
-<div class="menu-btn" onclick="openNav()">☰</div>
-
-<div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <a href="#" onclick="generateSensi('IPHONE VIP')">iPhone</a>
-    <a href="#" onclick="generateSensi('SAMSUNG PRO')">Samsung</a>
-    <a href="#" onclick="generateSensi('OPPO GAMING')">Oppo</a>
-    <a href="#" onclick="generateSensi('VIVO S-LINK')">Vivo</a>
-    <a href="#" onclick="generateSensi('XIAOMI MOD')">Xiaomi</a>
-</div>
-
 <div class="container">
-    <div class="header-box">
-        <div class="icon-box">H4X</div>
-        <div>
-            <h2 style="margin:0; font-size: 1rem;">SENSI PANEL</h2>
-            <p id="deviceDisplay" style="margin:3px 0 0; font-size: 0.75rem; color:var(--green);">VUI LÒNG CHỌN MÁY ☰</p>
+    <div class="header">
+        <div class="menu-icon">☰</div>
+        <div class="logo-text">H4X PANEL - MODTOOL</div>
+    </div>
+
+    <div class="panel-card">
+        <div class="card-title">Xác thực hệ thống</div>
+        <div class="pin-container">
+            <div class="pin-box"></div>
+            <div class="pin-box"></div>
+            <div class="pin-box"></div>
+            <div class="pin-box"></div>
+            <div class="pin-box"></div>
+            <div class="pin-box"></div>
         </div>
+        <p style="font-size: 11px; color:var(--glow-color); text-align: center;">Vui lòng nhập mã PIN để xác thực.</p>
     </div>
 
-    <div id="statsPanel" class="stats-container">
-        <div class="stat-row"><span>🌀 Nhìn xung quanh:</span> <span class="stat-val" id="val1">0</span></div>
-        <div class="stat-row"><span>🔴 Red Dot:</span> <span class="stat-val" id="val2">0</span></div>
-        <div class="stat-row"><span>🔭 Scope 2x:</span> <span class="stat-val" id="val3">0</span></div>
-        <div class="stat-row"><span>🔭 Scope 4x:</span> <span class="stat-val" id="val4">0</span></div>
-        <div class="stat-row"><span>🔥 Nút bắn:</span> <span class="stat-val" id="val5">0%</span></div>
+    <div class="panel-card">
+        <div class="card-title">Thông Tin Tài Khoản</div>
+        <div class="info-row"><span class="info-label">EMAIL HIỆN TẠI</span> <span class="info-value empty">Chua co email</span></div>
+        <div class="info-row"><span class="info-label">EMAIL SẼ ĐỔI</span> <span class="info-value empty">Khong co</span></div>
+        <div class="info-row"><span class="info-label">THỜI GIAN</span> <span class="info-value">0s</span></div>
     </div>
 
-    <div class="item">
-        <span>🔫 DESERT EAGLE</span>
-        <label class="switch"><input type="checkbox" onchange="playSfx()"><span class="slider"></span></label>
-    </div>
-    <div class="item">
-        <span>🔫 UMP TIỂU LIÊN</span>
-        <label class="switch"><input type="checkbox" onchange="playSfx()"><span class="slider"></span></label>
-    </div>
-    <div class="item">
-        <span>🎯 TÂM ẢO AIM</span>
-        <label class="switch"><input type="checkbox" onchange="playSfx()"><span class="slider"></span></label>
+    <div class="panel-card">
+        <div class="card-title">Đổi Email</div>
+        <div class="email-input-box">
+            <input type="email" class="email-input" placeholder="nhập email mới...">
+        </div>
+        <button class="btn btn-purple" onclick="alert('Đã gửi yêu cầu OTP!')">Gửi OTP</button>
+        <button class="btn btn-red" onclick="alert('Đã hủy yêu cầu.')">Hủy yêu cầu đổi mail</button>
     </div>
 
-    <button class="btn-green" onclick="alert('Đã áp dụng thông số vào Game!')">ÁP DỤNG CẤU HÌNH</button>
+    <div class="panel-card">
+        <div class="accordion">
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc('bypass')">OTP Bypass (MXT) <span class="acc-icon">▼</span></div>
+                <div id="acc-bypass" class="acc-content">Dùng mã OTP này để bypass bảo mật hệ thống.</div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc('spam')">Login Spam <span class="acc-icon">▼</span></div>
+                <div id="acc-spam" class="acc-content">Gửi nhiều yêu cầu đăng nhập để kiểm tra.</div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc('lock')">Khóa 7 Ngày <span class="acc-icon">▼</span></div>
+                <div id="acc-lock" class="acc-content">Kích hoạt chế độ khóa tạm thời 7 ngày.</div>
+            </div>
+        </div>
+        <div class="sub-link-btn">Thêm Email Mới</div>
+    </div>
 </div>
 
 <script>
-    function openNav() { document.getElementById("mySidebar").style.width = "250px"; }
-    function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
-    function playSfx() { document.getElementById('soundClick').play(); }
-
-    function getRandom(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function generateSensi(deviceName) {
-        // Hiện bảng thông số
-        document.getElementById("statsPanel").style.display = "block";
-        document.getElementById("deviceDisplay").innerText = "ĐANG DÙNG: " + deviceName;
-        
-        // Random từ 100 đến 200 cho 4 dòng đầu, riêng nút bắn random từ 30-60 cho chuẩn game
-        document.getElementById("val1").innerText = getRandom(100, 200);
-        document.getElementById("val2").innerText = getRandom(100, 200);
-        document.getElementById("val3").innerText = getRandom(100, 200);
-        document.getElementById("val4").innerText = getRandom(100, 200);
-        document.getElementById("val5").innerText = getRandom(35, 55) + "%";
-
-        playSfx();
-        closeNav();
+    // Hàm xử lý Menu thả xuống
+    function toggleAcc(id) {
+        const content = document.getElementById('acc-' + id);
+        // Kiểm tra xem nó có đang hiện không
+        if (content.style.display === 'block') {
+            content.style.display = 'none'; // Ẩn đi
+        } else {
+            // Ẩn tất cả các mục khác trước (để chỉ hiện 1 cái)
+            const allContents = document.querySelectorAll('.acc-content');
+            allContents.forEach(c => c.style.display = 'none');
+            content.style.display = 'block'; // Hiện cái được chọn
+        }
     }
 </script>
 
