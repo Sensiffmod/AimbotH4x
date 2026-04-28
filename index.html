@@ -8,39 +8,30 @@
     <style>
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow: hidden; }
         #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; top: 0; left: 0; }
-        
         .header { position: fixed; top: 0; left: 0; width: 100%; height: 60px; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(15px); border-bottom: 2px solid #00ff00; z-index: 100; display: none; justify-content: space-between; align-items: center; padding: 0 15px; box-sizing: border-box; }
         .balance-area { background: rgba(0,255,0,0.1); padding: 8px 15px; border-radius: 30px; border: 1px solid #00ff00; font-size: 14px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
-        
         .sidebar { position: fixed; top: 0; left: -280px; width: 260px; height: 100%; background: #0a0a0a; border-right: 1px solid #00ff00; z-index: 200; transition: 0.4s; padding: 25px 20px; box-sizing: border-box; visibility: hidden; }
         .sidebar.active { left: 0; visibility: visible; }
-
         .container { position: relative; z-index: 2; padding: 80px 15px 30px; box-sizing: border-box; max-width: 500px; margin: 0 auto; height: 100vh; overflow-y: auto; scrollbar-width: none; }
-        .container::-webkit-scrollbar { display: none; }
-        
-        #auth-screen { position: fixed; top:0; left:0; width:100%; height:100%; background:#050505; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
-        .auth-box { width: 100%; max-width: 380px; background: rgba(15, 15, 15, 0.98); border: 1px solid #00ff00; border-radius: 20px; padding: 35px 25px; text-align: center; }
-
+        #auth-screen { position: fixed; top:0; left:0; width:100%; height:100%; background:#050505; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .auth-box { width: 100%; max-width: 380px; background: #0f0f0f; border: 1px solid #00ff00; border-radius: 20px; padding: 35px 25px; text-align: center; }
         .section-title { font-size: 1rem; margin: 20px 0 10px; border-left: 4px solid #00ff00; padding-left: 10px; display: flex; align-items: center; gap: 8px; font-weight: bold; }
         .tk-color { color: #00ff00; border-color: #00ff00; }
         .fb-color { color: #1877F2; border-color: #1877F2; }
         .ig-color { color: #E1306C; border-color: #E1306C; }
-
         .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .product-card { background: rgba(20, 20, 20, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 5px; border-radius: 10px; text-align: center; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
-        .product-card:active { transform: scale(0.95); background: rgba(40,40,40,0.9); }
-        .vip-card { grid-column: span 2; border: 1px solid #ffd700 !important; background: linear-gradient(45deg, rgba(255,215,0,0.1), transparent); color: #ffd700; font-weight: bold; }
-
+        .product-card { background: rgba(20, 20, 20, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 5px; border-radius: 10px; text-align: center; cursor: pointer; font-size: 0.85rem; }
+        .vip-card { grid-column: span 2; border: 1px solid #ffd700 !important; color: #ffd700; font-weight: bold; }
         .panel { background: rgba(10, 10, 10, 0.98); border-radius: 20px; border: 1px solid #00ff00; padding: 20px; width: 100%; box-sizing: border-box; position: relative; margin-top: 5px; }
         .close-btn { position: absolute; top: 15px; right: 20px; color: #ff4444; font-size: 28px; cursor: pointer; }
-
-        .price-tag { background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; margin-bottom: 15px; text-align: center; border: 1px dashed #444; }
-        input { width: 100%; padding: 15px; background: #000; border: 1px solid #333; color: #fff; border-radius: 10px; margin-bottom: 12px; box-sizing: border-box; outline: none; }
+        .server-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 15px 0; }
+        .server-item { background: #1a1a1a; border: 1px solid #333; padding: 10px 5px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; text-align: center; }
+        .server-item.active { border-color: inherit; background: rgba(255, 255, 255, 0.1); font-weight: bold; }
+        .price-tag { background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; margin-bottom: 10px; text-align: center; border: 1px dashed #444; font-size: 0.9rem; }
+        input { width: 100%; padding: 14px; background: #000; border: 1px solid #333; color: #fff; border-radius: 10px; margin-bottom: 10px; box-sizing: border-box; outline: none; }
         .btn-main { background: #00ff00; color: #000; border: none; padding: 16px; width: 100%; border-radius: 10px; font-weight: 800; cursor: pointer; }
-        
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 150; display: none; }
         .popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 360px; background: #0f0f0f; padding: 25px; border-radius: 20px; border: 2px solid #00ff00; z-index: 300; display: none; text-align: center; }
-
         #home, #service-detail, #admin-login, #admin-panel { display: none; }
     </style>
 </head>
@@ -91,7 +82,7 @@
             <div class="product-card" onclick="openSv('Like Bài Viết', 'facebook')">Like Bài Viết</div>
             <div class="product-card" onclick="openSv('Theo Dõi FB', 'facebook')">Theo Dõi</div>
             <div class="product-card" onclick="openSv('View Video FB', 'facebook')">View Video</div>
-            <div class="product-card" onclick="openSv('Share Bài Viết', 'facebook')">Tăng Share</div>
+            <div class="product-card" onclick="openSv('Share FB', 'facebook')">Tăng Share</div>
         </div>
 
         <div class="section-title ig-color"><i class="fab fa-instagram"></i> INSTAGRAM</div>
@@ -105,10 +96,16 @@
     <div id="service-detail" class="panel">
         <div class="close-btn" onclick="goHome()">×</div>
         <h2 id="sv-name">Dịch vụ</h2>
-        <div class="price-tag">Giá: <span id="u-price" style="font-weight:bold;">0</span>đ | Min: <span id="u-min">0</span></div>
+        <div class="server-grid" id="sv-server-box">
+            <div class="server-item active" onclick="setReg(this, 'S1')">S1-Tây</div>
+            <div class="server-item" onclick="setReg(this, 'S2')">S2-Việt</div>
+            <div class="server-item" onclick="setReg(this, 'S3')">S3-Bot</div>
+            <div class="server-item" onclick="setReg(this, 'S4')">S4-Ảo</div>
+        </div>
+        <div class="price-tag">Giá: <span id="u-price" style="font-weight:bold;">0</span>đ | Min: <span id="u-min">0</span> - Max: <span id="u-max">0</span></div>
         <input type="text" id="tk-link" placeholder="Nhập Link hoặc ID...">
         <input type="number" id="tk-amount" placeholder="Nhập số lượng..." oninput="calc()">
-        <div style="text-align:right; margin-bottom:15px; font-weight:bold;">TỔNG: <span id="total" style="font-size:1.2rem;">0</span>đ</div>
+        <div style="text-align:right; margin-bottom:10px; font-weight:bold;">TỔNG: <span id="total" style="font-size:1.2rem;">0</span>đ</div>
         <button class="btn-main" id="btn-buy" onclick="order()">XÁC NHẬN MUA</button>
     </div>
 
@@ -123,7 +120,7 @@
         <div class="close-btn" onclick="goHome()">×</div>
         <h3 style="text-align:center; color:#00ff00;">QUẢN TRỊ VIÊN</h3>
         <button class="btn-main" onclick="create2000Codes()">TẠO 2000 MÃ GIFTCODE</button>
-        <div id="gift-list-area" style="background:#000; padding:10px; margin-top:10px; border-radius:10px; max-height:150px; overflow-y:auto; font-family:monospace; font-size:11px; color:#00ff00;">Mã sẽ hiện ở đây...</div>
+        <div id="gift-list-area" style="background:#000; padding:10px; margin-top:10px; border-radius:10px; max-height:150px; overflow-y:auto; font-family:monospace; font-size:11px; color:#00ff00;">Mã hiện ở đây...</div>
     </div>
 </div>
 
@@ -142,72 +139,84 @@
 <script>
     particlesJS("particles-js", {"particles":{"number":{"value":30},"color":{"value":"#00ff00"},"size":{"value":2},"move":{"speed":1}}});
 
-    const prices = {
-        'tiktok': {
-            'Tick Xanh TikTok': { price: 1500000, min: 1, isVip: true },
-            'Tim TikTok': { price: 1.2, min: 50 },
-            'Follow TikTok': { price: 25, min: 100 },
-            'View TikTok': { price: 0.5, min: 500 },
-            'Share TikTok': { price: 1, min: 50 },
-            'Lưu TikTok': { price: 0.8, min: 50 }
-        },
-        'facebook': {
-            'Tick Xanh Facebook': { price: 1500000, min: 1, isVip: true },
-            'Like Bài Viết': { price: 15, min: 50 },
-            'Theo Dõi FB': { price: 40, min: 100 },
-            'View Video FB': { price: 2, min: 500 },
-            'Share Bài Viết': { price: 10, min: 50 }
-        },
-        'instagram': {
-            'Like Post IG': { price: 10, min: 50 },
-            'Follow IG': { price: 30, min: 100 },
-            'View Video IG': { price: 2, min: 500 }
-        }
+    const config = {
+        'view': { min: 100, max: 5000, prices: { S1: 0.5, S2: 1.2, S3: 0.3, S4: 0.2 } },
+        'tim': { min: 10, max: 1000, prices: { S1: 1, S2: 1.5, S3: 0.5, S4: 0.4 } },
+        'follow': { min: 10, max: 1000, prices: { S1: 15, S2: 25, S3: 10, S4: 8 } },
+        'vip': { min: 1, max: 1, prices: { S1: 1500000, S2: 1500000, S3: 1500000, S4: 1500000 } }
     };
 
-    let curCat = '', curPlat = '', adCount = 0, balance = 0, validGiftcodes = [];
+    const services = {
+        'Tick Xanh TikTok': config.vip, 'Tim TikTok': config.tim, 'Follow TikTok': config.follow, 'View TikTok': config.view, 'Share TikTok': config.view, 'Lưu TikTok': config.view,
+        'Tick Xanh Facebook': config.vip, 'Like Bài Viết': config.tim, 'Theo Dõi FB': config.follow, 'View Video FB': config.view, 'Share FB': config.view,
+        'Like Post IG': config.tim, 'Follow IG': config.follow, 'View Video IG': config.view
+    };
+
+    let curCat = '', curReg = 'S1', curPlat = '', adCount = 0, balance = 0, validGiftcodes = [];
 
     function handleAuth() {
-        const u = document.getElementById('auth-user').value;
-        if(u) {
+        if(document.getElementById('auth-user').value) {
             document.getElementById('auth-screen').style.display = 'none';
             document.getElementById('main-header').style.display = 'flex';
             document.getElementById('home').style.display = 'block';
-            document.getElementById('user-display').innerText = u;
+            document.getElementById('user-display').innerText = document.getElementById('auth-user').value;
         }
     }
 
     function openSv(cat, plat, isVip = false) {
-        curCat = cat; curPlat = plat;
+        curCat = cat; curPlat = plat; curReg = 'S1';
         document.getElementById('home').style.display = 'none';
         document.getElementById('service-detail').style.display = 'block';
         document.getElementById('sv-name').innerText = cat;
         
-        let themeColor = (plat === 'tiktok') ? '#00ff00' : (plat === 'facebook' ? '#1877F2' : '#E1306C');
-        document.getElementById('service-detail').style.borderColor = themeColor;
-        document.getElementById('sv-name').style.color = themeColor;
-        document.getElementById('btn-buy').style.backgroundColor = themeColor;
-
-        document.getElementById('tk-link').placeholder = (plat === 'tiktok') ? "Nhập ID TikTok..." : "Dán link hồ sơ/bài viết...";
+        let color = (plat === 'tiktok') ? '#00ff00' : (plat === 'facebook' ? '#1877F2' : '#E1306C');
+        document.getElementById('service-detail').style.borderColor = color;
+        document.getElementById('sv-name').style.color = color;
+        document.getElementById('btn-buy').style.backgroundColor = color;
         
+        document.querySelectorAll('.server-item').forEach(i => {
+            i.classList.remove('active');
+            if(i.innerText.includes('S1')) i.classList.add('active');
+        });
+
         const amtInput = document.getElementById('tk-amount');
-        if(isVip) { amtInput.value = 1; amtInput.readOnly = true; } 
-        else { amtInput.value = ''; amtInput.readOnly = false; }
+        if(isVip) { amtInput.value = 1; amtInput.readOnly = true; document.getElementById('sv-server-box').style.display = 'none'; } 
+        else { amtInput.value = ''; amtInput.readOnly = false; document.getElementById('sv-server-box').style.display = 'grid'; }
         
         updateUI();
     }
 
+    function setReg(el, reg) {
+        curReg = reg;
+        document.querySelectorAll('.server-item').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+        updateUI();
+    }
+
     function updateUI() {
-        const data = prices[curPlat][curCat];
-        document.getElementById('u-price').innerText = data.price.toLocaleString();
+        const data = services[curCat];
+        document.getElementById('u-price').innerText = data.prices[curReg].toLocaleString();
         document.getElementById('u-min').innerText = data.min;
+        document.getElementById('u-max').innerText = data.max;
         calc();
     }
 
     function calc() {
         let q = parseInt(document.getElementById('tk-amount').value) || 0;
-        let p = prices[curPlat][curCat].price;
+        let p = services[curCat].prices[curReg];
         document.getElementById('total').innerText = (q * p).toLocaleString();
+    }
+
+    function order() {
+        let q = parseInt(document.getElementById('tk-amount').value) || 0;
+        let data = services[curCat];
+        if(q < data.min || q > data.max) return alert(`Số lượng phải từ ${data.min} đến ${data.max}`);
+        let total = q * data.prices[curReg];
+        if(balance < total) return alert("Không đủ tiền!");
+        balance -= total;
+        document.getElementById('money').innerText = balance.toLocaleString();
+        alert("Mua thành công!");
+        goHome();
     }
 
     function create2000Codes() {
@@ -218,38 +227,27 @@
             if(i < 50) html += `<div>${i+1}. ${code}</div>`;
         }
         document.getElementById('gift-list-area').innerHTML = html + "<div>...và 1950 mã khác</div>";
-        alert("Đã tạo 2000 mã Giftcode!");
+        alert("Đã tạo 2000 mã!");
     }
 
     function redeemGiftcode() {
-        const code = document.getElementById('gift-input').value.trim().toUpperCase();
-        const index = validGiftcodes.indexOf(code);
-        if(index !== -1) {
-            validGiftcodes.splice(index, 1);
+        const input = document.getElementById('gift-input').value.trim().toUpperCase();
+        const idx = validGiftcodes.indexOf(input);
+        if(idx !== -1) {
+            validGiftcodes.splice(idx, 1);
             balance += 50000;
             document.getElementById('money').innerText = balance.toLocaleString();
-            alert("Nạp thành công 50,000đ!");
+            alert("Đã cộng 50,000đ!");
             closeAll();
-        } else { alert("Mã sai hoặc đã dùng!"); }
+        } else alert("Mã sai!");
     }
 
     function adClick() { adCount++; if(adCount >= 10) { adCount = 0; document.getElementById('admin-login').style.display = 'block'; document.getElementById('home').style.display='none'; } }
-    function checkAd() { if(document.getElementById('ad-pass').value === "HuySMM@2026#Vip") { document.getElementById('admin-login').style.display = 'none'; document.getElementById('admin-panel').style.display = 'block'; } else { alert("Sai pass!"); } }
-    
+    function checkAd() { if(document.getElementById('ad-pass').value === "HuySMM@2026#Vip") { document.getElementById('admin-login').style.display = 'none'; document.getElementById('admin-panel').style.display = 'block'; } else alert("Sai pass!"); }
     function toggleSide() { document.getElementById('side').classList.toggle('active'); document.getElementById('over').style.display = 'block'; }
     function showPopup(id) { closeAll(); document.getElementById(id).style.display = 'block'; document.getElementById('over').style.display = 'block'; }
     function closeAll() { document.getElementById('side').classList.remove('active'); document.querySelectorAll('.popup').forEach(p => p.style.display = 'none'); document.getElementById('over').style.display = 'none'; }
     function goHome() { document.querySelectorAll('.panel, #home').forEach(e => e.style.display = 'none'); document.getElementById('home').style.display = 'block'; }
-    
-    function order() {
-        const q = parseInt(document.getElementById('tk-amount').value) || 0;
-        const total = q * prices[curPlat][curCat].price;
-        if(balance < total) return alert("Không đủ tiền!");
-        balance -= total;
-        document.getElementById('money').innerText = balance.toLocaleString();
-        alert("Mua thành công!");
-        goHome();
-    }
 </script>
 </body>
 </html>
