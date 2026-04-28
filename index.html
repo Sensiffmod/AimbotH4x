@@ -14,36 +14,33 @@
         
         .sidebar { position: fixed; top: 0; left: -280px; width: 260px; height: 100%; background: #0a0a0a; border-right: 1px solid #00ff00; z-index: 200; transition: 0.4s; padding: 25px 20px; box-sizing: border-box; visibility: hidden; }
         .sidebar.active { left: 0; visibility: visible; }
-        .user-tag { color: #00ff00; font-weight: bold; font-size: 1.2rem; margin-bottom: 30px; border-bottom: 1px solid #222; padding-bottom: 15px; }
 
-        .container { position: relative; z-index: 2; padding: 80px 15px 30px; box-sizing: border-box; max-width: 500px; margin: 0 auto; height: 100vh; overflow-y: auto; }
+        .container { position: relative; z-index: 2; padding: 80px 15px 30px; box-sizing: border-box; max-width: 500px; margin: 0 auto; height: 100vh; overflow-y: auto; scrollbar-width: none; }
+        .container::-webkit-scrollbar { display: none; }
         
         #auth-screen { position: fixed; top:0; left:0; width:100%; height:100%; background:#050505; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
         .auth-box { width: 100%; max-width: 380px; background: rgba(15, 15, 15, 0.98); border: 1px solid #00ff00; border-radius: 20px; padding: 35px 25px; text-align: center; }
 
-        .section-title { color: #00ff00; font-size: 1.1rem; margin: 20px 0 10px; border-left: 4px solid #00ff00; padding-left: 10px; display: flex; align-items: center; gap: 8px; font-weight: bold; }
-        .fb-title { color: #1877F2; border-color: #1877F2; }
-        .ig-title { color: #E1306C; border-color: #E1306C; }
+        .section-title { font-size: 1rem; margin: 20px 0 10px; border-left: 4px solid #00ff00; padding-left: 10px; display: flex; align-items: center; gap: 8px; font-weight: bold; }
+        .tk-color { color: #00ff00; border-color: #00ff00; }
+        .fb-color { color: #1877F2; border-color: #1877F2; }
+        .ig-color { color: #E1306C; border-color: #E1306C; }
 
-        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-        .product-card { background: rgba(20, 20, 20, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); padding: 15px 10px; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
-        .product-card:active { transform: scale(0.95); }
-        .vip-card { grid-column: span 2; border: 1px solid #ffd700 !important; color: #ffd700; font-weight: bold; background: rgba(255, 215, 0, 0.05); }
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .product-card { background: rgba(20, 20, 20, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 5px; border-radius: 10px; text-align: center; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
+        .product-card:active { transform: scale(0.95); background: rgba(40,40,40,0.9); }
+        .vip-card { grid-column: span 2; border: 1px solid #ffd700 !important; background: linear-gradient(45deg, rgba(255,215,0,0.1), transparent); color: #ffd700; font-weight: bold; }
 
-        .panel { background: rgba(10, 10, 10, 0.98); border-radius: 20px; border: 1px solid #00ff00; padding: 20px; width: 100%; box-sizing: border-box; position: relative; margin-top: 15px; transition: 0.3s; }
+        .panel { background: rgba(10, 10, 10, 0.98); border-radius: 20px; border: 1px solid #00ff00; padding: 20px; width: 100%; box-sizing: border-box; position: relative; margin-top: 5px; }
         .close-btn { position: absolute; top: 15px; right: 20px; color: #ff4444; font-size: 28px; cursor: pointer; }
-
-        .server-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0; }
-        .server-item { background: #1a1a1a; border: 1px solid #333; padding: 12px 5px; border-radius: 10px; cursor: pointer; font-size: 0.85rem; text-align: center; }
-        .server-item.active { border-color: inherit; background: rgba(255, 255, 255, 0.1); font-weight: bold; }
 
         .price-tag { background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; margin-bottom: 15px; text-align: center; border: 1px dashed #444; }
         input { width: 100%; padding: 15px; background: #000; border: 1px solid #333; color: #fff; border-radius: 10px; margin-bottom: 12px; box-sizing: border-box; outline: none; }
-        .btn-main { background: #00ff00; color: #000; border: none; padding: 16px; width: 100%; border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.3s; }
+        .btn-main { background: #00ff00; color: #000; border: none; padding: 16px; width: 100%; border-radius: 10px; font-weight: 800; cursor: pointer; }
         
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 150; display: none; }
         .popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 360px; background: #0f0f0f; padding: 25px; border-radius: 20px; border: 2px solid #00ff00; z-index: 300; display: none; text-align: center; }
-        
+
         #home, #service-detail, #admin-login, #admin-panel { display: none; }
     </style>
 </head>
@@ -53,11 +50,10 @@
 
 <div id="auth-screen">
     <div class="auth-box">
-        <h2 id="auth-title" style="color:#00ff00;">HỆ THỐNG SMM VIP</h2>
+        <h2 style="color:#00ff00;">HỆ THỐNG SMM VIP</h2>
         <input type="text" id="auth-user" placeholder="Tên tài khoản...">
         <input type="password" id="auth-pass" placeholder="Mật khẩu...">
         <button class="btn-main" onclick="handleAuth()">VÀO HỆ THỐNG</button>
-        <p onclick="toggleAuth(true)" style="font-size:13px; color:#aaa; cursor:pointer; margin-top:20px;">Chưa có tài khoản? <span style="color:#00ff00">Đăng ký</span></p>
     </div>
 </div>
 
@@ -67,10 +63,9 @@
 </div>
 
 <div class="sidebar" id="side">
-    <div class="user-tag"><i class="fas fa-user-circle"></i> <span id="user-display">Guest</span></div>
+    <div style="color:#00ff00; font-weight:bold; font-size:1.2rem; margin-bottom:30px;"><i class="fas fa-user-circle"></i> <span id="user-display">User</span></div>
     <div onclick="showPopup('qr-pop')" style="padding:15px 0; border-bottom:1px solid #222; cursor:pointer;"><i class="fas fa-qrcode" style="color:#00ff00; margin-right:10px;"></i> Nạp Tiền QR</div>
     <div onclick="showPopup('gift-pop')" style="padding:15px 0; border-bottom:1px solid #222; cursor:pointer;"><i class="fas fa-gift" style="color:#00ff00; margin-right:10px;"></i> Nhập Giftcode</div>
-    <div onclick="window.open('https://zalo.me/0397208110')" style="padding:15px 0; border-bottom:1px solid #222; cursor:pointer;"><i class="fab fa-whatsapp" style="color:#00ff00; margin-right:10px;"></i> Hỗ Trợ Zalo</div>
     <div onclick="location.reload()" style="padding:15px 0; color:red; cursor:pointer;"><i class="fas fa-sign-out-alt"></i> Đăng xuất</div>
 </div>
 
@@ -78,62 +73,57 @@
 
 <div class="container">
     <div id="home">
-        <h1 id="title-main" onclick="adClick()" style="text-align:center; color:#00ff00; font-size:1.5rem; cursor:pointer; margin-bottom:25px;">SMM VIỆT NAM SYSTEM</h1>
+        <h1 id="title-main" onclick="adClick()" style="text-align:center; color:#00ff00; font-size:1.4rem; cursor:pointer; margin-bottom:20px;">SMM VIỆT NAM SYSTEM</h1>
         
-        <div class="section-title"><i class="fab fa-tiktok"></i> TIKTOK</div>
+        <div class="section-title tk-color"><i class="fab fa-tiktok"></i> TIKTOK</div>
         <div class="product-grid">
             <div class="product-card vip-card" onclick="openSv('Tick Xanh TikTok', 'tiktok', true)">LÊN TICK XANH TIKTOK</div>
-            <div class="product-card" onclick="openSv('Tim', 'tiktok')">Tăng Tim</div>
-            <div class="product-card" onclick="openSv('Follow', 'tiktok')">Tăng Follow</div>
+            <div class="product-card" onclick="openSv('Tim TikTok', 'tiktok')">Tăng Tim</div>
+            <div class="product-card" onclick="openSv('Follow TikTok', 'tiktok')">Tăng Follow</div>
+            <div class="product-card" onclick="openSv('View TikTok', 'tiktok')">Tăng View</div>
+            <div class="product-card" onclick="openSv('Share TikTok', 'tiktok')">Tăng Share</div>
+            <div class="product-card" onclick="openSv('Lưu TikTok', 'tiktok')">Tăng Lưu</div>
         </div>
 
-        <div class="section-title fb-title"><i class="fab fa-facebook"></i> FACEBOOK</div>
+        <div class="section-title fb-color"><i class="fab fa-facebook"></i> FACEBOOK</div>
         <div class="product-grid">
-            <div class="product-card fb-card vip-card" style="border-color:#1877F2 !important;" onclick="openSv('Tick Xanh Facebook', 'facebook', true)">LÊN TICK XANH FACEBOOK</div>
-            <div class="product-card fb-card" onclick="openSv('Like Post', 'facebook')">Like Bài Viết</div>
-            <div class="product-card fb-card" onclick="openSv('Sub Cá Nhân', 'facebook')">Theo Dõi</div>
+            <div class="product-card vip-card" style="border-color:#1877F2 !important;" onclick="openSv('Tick Xanh Facebook', 'facebook', true)">LÊN TICK XANH FACEBOOK</div>
+            <div class="product-card" onclick="openSv('Like Bài Viết', 'facebook')">Like Bài Viết</div>
+            <div class="product-card" onclick="openSv('Theo Dõi FB', 'facebook')">Theo Dõi</div>
+            <div class="product-card" onclick="openSv('View Video FB', 'facebook')">View Video</div>
+            <div class="product-card" onclick="openSv('Share Bài Viết', 'facebook')">Tăng Share</div>
         </div>
 
-        <div class="section-title ig-title"><i class="fab fa-instagram"></i> INSTAGRAM</div>
+        <div class="section-title ig-color"><i class="fab fa-instagram"></i> INSTAGRAM</div>
         <div class="product-grid">
-            <div class="product-card ig-card" onclick="openSv('Like IG', 'instagram')">Like Post</div>
-            <div class="product-card ig-card" onclick="openSv('Follow IG', 'instagram')">Follow</div>
-            <div class="product-card ig-card" onclick="openSv('View IG', 'instagram')">View Video</div>
+            <div class="product-card" onclick="openSv('Like Post IG', 'instagram')">Like Post</div>
+            <div class="product-card" onclick="openSv('Follow IG', 'instagram')">Tăng Follow</div>
+            <div class="product-card" onclick="openSv('View Video IG', 'instagram')">View Video</div>
         </div>
     </div>
 
     <div id="service-detail" class="panel">
         <div class="close-btn" onclick="goHome()">×</div>
-        <h2 id="sv-name" style="margin:0 0 10px 0;">Dịch vụ</h2>
-        
-        <div class="server-grid" id="sv-server-box">
-            <div class="server-item active" onclick="setReg(this, 'việt')">Server Việt</div>
-            <div class="server-item" onclick="setReg(this, 'tây')">Server Quốc Tế</div>
-        </div>
-
-        <div class="price-tag">
-            Giá: <span id="u-price" style="font-weight:bold;">0</span>đ | Min: <span id="u-min">0</span>
-        </div>
-
-        <input type="text" id="tk-link" placeholder="Dán link...">
+        <h2 id="sv-name">Dịch vụ</h2>
+        <div class="price-tag">Giá: <span id="u-price" style="font-weight:bold;">0</span>đ | Min: <span id="u-min">0</span></div>
+        <input type="text" id="tk-link" placeholder="Nhập Link hoặc ID...">
         <input type="number" id="tk-amount" placeholder="Nhập số lượng..." oninput="calc()">
-        
         <div style="text-align:right; margin-bottom:15px; font-weight:bold;">TỔNG: <span id="total" style="font-size:1.2rem;">0</span>đ</div>
-        <button class="btn-main" id="btn-buy" onclick="order()">MUA NGAY</button>
+        <button class="btn-main" id="btn-buy" onclick="order()">XÁC NHẬN MUA</button>
     </div>
 
     <div id="admin-login" class="panel">
         <div class="close-btn" onclick="goHome()">×</div>
-        <h3 style="text-align:center; color:#00ff00;">XÁC MINH ADMIN</h3>
-        <input type="password" id="ad-pass" placeholder="Nhập mật khẩu quản trị...">
-        <button class="btn-main" onclick="checkAd()">ĐĂNG NHẬP ADMIN</button>
+        <h3 style="text-align:center;">XÁC MINH ADMIN</h3>
+        <input type="password" id="ad-pass" placeholder="Mật khẩu quản trị...">
+        <button class="btn-main" onclick="checkAd()">ĐĂNG NHẬP</button>
     </div>
 
     <div id="admin-panel" class="panel">
         <div class="close-btn" onclick="goHome()">×</div>
         <h3 style="text-align:center; color:#00ff00;">QUẢN TRỊ VIÊN</h3>
-        <button class="btn-main" onclick="create2000Codes()" style="margin-bottom:10px;">TẠO 2000 MÃ GIFTCODE</button>
-        <div id="gift-list-area" style="background:#000; padding:10px; border-radius:10px; max-height:150px; overflow-y:auto; font-family:monospace; font-size:11px; color:#00ff00; border:1px solid #333;">Mã sẽ hiện ở đây...</div>
+        <button class="btn-main" onclick="create2000Codes()">TẠO 2000 MÃ GIFTCODE</button>
+        <div id="gift-list-area" style="background:#000; padding:10px; margin-top:10px; border-radius:10px; max-height:150px; overflow-y:auto; font-family:monospace; font-size:11px; color:#00ff00;">Mã sẽ hiện ở đây...</div>
     </div>
 </div>
 
@@ -150,101 +140,85 @@
 
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
-    particlesJS("particles-js", {"particles":{"number":{"value":40},"color":{"value":"#00ff00"},"size":{"value":2},"move":{"speed":1}}});
+    particlesJS("particles-js", {"particles":{"number":{"value":30},"color":{"value":"#00ff00"},"size":{"value":2},"move":{"speed":1}}});
 
     const prices = {
         'tiktok': {
-            'Tick Xanh TikTok': { 'việt': 1500000, 'tây': 1500000, min: 1, isVip: true },
-            'Tim': { 'việt': 1.2, 'tây': 1, min: 50 },
-            'Follow': { 'việt': 23, 'tây': 13, min: 100 }
+            'Tick Xanh TikTok': { price: 1500000, min: 1, isVip: true },
+            'Tim TikTok': { price: 1.2, min: 50 },
+            'Follow TikTok': { price: 25, min: 100 },
+            'View TikTok': { price: 0.5, min: 500 },
+            'Share TikTok': { price: 1, min: 50 },
+            'Lưu TikTok': { price: 0.8, min: 50 }
         },
         'facebook': {
-            'Tick Xanh Facebook': { 'việt': 1500000, 'tây': 1500000, min: 1, isVip: true },
-            'Like Post': { 'việt': 15, 'tây': 5, min: 50 },
-            'Sub Cá Nhân': { 'việt': 40, 'tây': 25, min: 100 }
+            'Tick Xanh Facebook': { price: 1500000, min: 1, isVip: true },
+            'Like Bài Viết': { price: 15, min: 50 },
+            'Theo Dõi FB': { price: 40, min: 100 },
+            'View Video FB': { price: 2, min: 500 },
+            'Share Bài Viết': { price: 10, min: 50 }
         },
         'instagram': {
-            'Like IG': { 'việt': 10, 'tây': 5, min: 50 },
-            'Follow IG': { 'việt': 30, 'tây': 15, min: 100 },
-            'View IG': { 'việt': 2, 'tây': 1, min: 500 }
+            'Like Post IG': { price: 10, min: 50 },
+            'Follow IG': { price: 30, min: 100 },
+            'View Video IG': { price: 2, min: 500 }
         }
     };
 
-    let curCat = '', curReg = 'việt', curPlat = 'tiktok', adCount = 0, isRegMode = false;
-    let balance = 0;
-    let validGiftcodes = [];
+    let curCat = '', curPlat = '', adCount = 0, balance = 0, validGiftcodes = [];
 
     function handleAuth() {
         const u = document.getElementById('auth-user').value;
-        const p = document.getElementById('auth-pass').value;
-        if(!u || !p) return alert("Vui lòng điền đủ!");
-        document.getElementById('auth-screen').style.display = 'none';
-        document.getElementById('main-header').style.display = 'flex';
-        document.getElementById('home').style.display = 'block';
-        document.getElementById('user-display').innerText = u;
+        if(u) {
+            document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('main-header').style.display = 'flex';
+            document.getElementById('home').style.display = 'block';
+            document.getElementById('user-display').innerText = u;
+        }
     }
 
-    function toggleAuth(reg) { isRegMode = reg; document.getElementById('auth-title').innerText = reg ? "ĐĂNG KÝ" : "ĐĂNG NHẬP"; }
-
     function openSv(cat, plat, isVip = false) {
-        curCat = cat; curPlat = plat; curReg = 'việt';
+        curCat = cat; curPlat = plat;
         document.getElementById('home').style.display = 'none';
         document.getElementById('service-detail').style.display = 'block';
         document.getElementById('sv-name').innerText = cat;
         
-        let themeColor = plat === 'tiktok' ? '#00ff00' : (plat === 'facebook' ? '#1877F2' : '#E1306C');
-        const panel = document.getElementById('service-detail');
-        panel.style.borderColor = themeColor;
+        let themeColor = (plat === 'tiktok') ? '#00ff00' : (plat === 'facebook' ? '#1877F2' : '#E1306C');
+        document.getElementById('service-detail').style.borderColor = themeColor;
         document.getElementById('sv-name').style.color = themeColor;
         document.getElementById('btn-buy').style.backgroundColor = themeColor;
 
-        const linkInput = document.getElementById('tk-link');
-        linkInput.placeholder = (plat === 'tiktok') ? "Nhập ID TikTok..." : "Dán link hồ sơ/bài viết...";
-
-        const amountInput = document.getElementById('tk-amount');
-        if(isVip) {
-            amountInput.value = 1;
-            amountInput.readOnly = true;
-            document.getElementById('sv-server-box').style.display = 'none';
-        } else {
-            amountInput.value = '';
-            amountInput.readOnly = false;
-            document.getElementById('sv-server-box').style.display = 'grid';
-        }
-
-        updateUI();
-    }
-
-    function setReg(el, reg) {
-        curReg = reg;
-        document.querySelectorAll('.server-item').forEach(i => i.classList.remove('active'));
-        el.classList.add('active');
+        document.getElementById('tk-link').placeholder = (plat === 'tiktok') ? "Nhập ID TikTok..." : "Dán link hồ sơ/bài viết...";
+        
+        const amtInput = document.getElementById('tk-amount');
+        if(isVip) { amtInput.value = 1; amtInput.readOnly = true; } 
+        else { amtInput.value = ''; amtInput.readOnly = false; }
+        
         updateUI();
     }
 
     function updateUI() {
         const data = prices[curPlat][curCat];
-        document.getElementById('u-price').innerText = data[curReg].toLocaleString();
+        document.getElementById('u-price').innerText = data.price.toLocaleString();
         document.getElementById('u-min').innerText = data.min;
         calc();
     }
 
     function calc() {
         let q = parseInt(document.getElementById('tk-amount').value) || 0;
-        let p = prices[curPlat][curCat][curReg];
+        let p = prices[curPlat][curCat].price;
         document.getElementById('total').innerText = (q * p).toLocaleString();
     }
 
     function create2000Codes() {
-        validGiftcodes = [];
-        let html = "";
+        validGiftcodes = []; let html = "";
         for(let i=0; i<2000; i++) {
-            let code = "GIFT-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+            let code = "HUY-" + Math.random().toString(36).substring(2, 8).toUpperCase();
             validGiftcodes.push(code);
-            if(i < 100) html += `<div>${i+1}. ${code}</div>`;
+            if(i < 50) html += `<div>${i+1}. ${code}</div>`;
         }
-        document.getElementById('gift-list-area').innerHTML = html + "<div>...và 1900 mã khác</div>";
-        alert("Đã tạo 2000 mã thành công!");
+        document.getElementById('gift-list-area').innerHTML = html + "<div>...và 1950 mã khác</div>";
+        alert("Đã tạo 2000 mã Giftcode!");
     }
 
     function redeemGiftcode() {
@@ -256,39 +230,24 @@
             document.getElementById('money').innerText = balance.toLocaleString();
             alert("Nạp thành công 50,000đ!");
             closeAll();
-        } else {
-            alert("Mã không chính xác hoặc đã sử dụng!");
-        }
+        } else { alert("Mã sai hoặc đã dùng!"); }
     }
 
-    function toggleSide() { 
-        const side = document.getElementById('side');
-        side.classList.toggle('active');
-        document.getElementById('over').style.display = side.classList.contains('active') ? 'block' : 'none';
-    }
-
-    function showPopup(id) { closeAll(); document.getElementById(id).style.display = 'block'; document.getElementById('over').style.display = 'block'; }
-    function closeAll() { 
-        document.getElementById('side').classList.remove('active');
-        document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
-        document.getElementById('over').style.display = 'none';
-    }
-
-    function goHome() { 
-        document.querySelectorAll('.panel, #home').forEach(e => e.style.display = 'none'); 
-        document.getElementById('home').style.display = 'block'; 
-    }
-
-    function adClick() { adCount++; if(adCount >= 10) { adCount = 0; goHome(); document.getElementById('home').style.display='none'; document.getElementById('admin-login').style.display = 'block'; } }
+    function adClick() { adCount++; if(adCount >= 10) { adCount = 0; document.getElementById('admin-login').style.display = 'block'; document.getElementById('home').style.display='none'; } }
     function checkAd() { if(document.getElementById('ad-pass').value === "HuySMM@2026#Vip") { document.getElementById('admin-login').style.display = 'none'; document.getElementById('admin-panel').style.display = 'block'; } else { alert("Sai pass!"); } }
     
+    function toggleSide() { document.getElementById('side').classList.toggle('active'); document.getElementById('over').style.display = 'block'; }
+    function showPopup(id) { closeAll(); document.getElementById(id).style.display = 'block'; document.getElementById('over').style.display = 'block'; }
+    function closeAll() { document.getElementById('side').classList.remove('active'); document.querySelectorAll('.popup').forEach(p => p.style.display = 'none'); document.getElementById('over').style.display = 'none'; }
+    function goHome() { document.querySelectorAll('.panel, #home').forEach(e => e.style.display = 'none'); document.getElementById('home').style.display = 'block'; }
+    
     function order() {
-        const amount = parseInt(document.getElementById('tk-amount').value);
-        const total = amount * prices[curPlat][curCat][curReg];
-        if(balance < total) return alert("Số dư không đủ!");
+        const q = parseInt(document.getElementById('tk-amount').value) || 0;
+        const total = q * prices[curPlat][curCat].price;
+        if(balance < total) return alert("Không đủ tiền!");
         balance -= total;
         document.getElementById('money').innerText = balance.toLocaleString();
-        alert("Đơn hàng đã được duyệt!");
+        alert("Mua thành công!");
         goHome();
     }
 </script>
